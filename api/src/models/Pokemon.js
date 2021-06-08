@@ -11,25 +11,25 @@ module.exports = (sequelize) => {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
      },
     healthpoints: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER  
     },
     attack: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER  
     },
     defense: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER  
     },
     speed: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER  
     },
     height: {
-      type: DataTypes.INTEGER
+      type:DataTypes.INTEGER  
     },
     weight: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER  
     }
   });
 };
