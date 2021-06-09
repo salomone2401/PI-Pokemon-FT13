@@ -18,6 +18,6 @@ addPokemon
 router.get('/:id',
 getPokemonById
 )
-router.get(`/?name=${req.params.page}`,
+router.get('/:name',
 )
 module.exports = router;

@@ -59,7 +59,7 @@ exports.getPokemonById = (req, res, next) => {
 //    })
 
 exports.getPokemonByName = (req, res, next) => {
-    const api = axios.get()
+    const api = axios.get(`https://pokeapi.co/api/v2/pokemon/${req.params.name}`)
         .then(response => {
             let apiRes = response
             return res.send(
@@ -76,6 +76,3 @@ exports.getPokemonByName = (req, res, next) => {
         .catch((error) => next(error))
 };
 
-//    [ ] GET /pokemons?name="...":
-// Obtener el pokemon que coincida exactamente con el nombre pasado como query parameter (Puede ser de pokeapi o creado por nosotros)
-// Si no existe ningún pokemon mostrar un mensaje adecuado
