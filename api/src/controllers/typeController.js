@@ -5,31 +5,28 @@ const { v4: uuidv4 } = require('uuid');
 
 
 
-// exports.getAllTypes = async (req, res, next) => {
-//     try {
-//         const api = await axios.get('https://pokeapi.co/api/v2/type')
-//         res.send({
-//             type: res.data.results.map(x => x.name)
-//         })
-//     } catch (error) {
-//         next(error)
-//     }
-// };
-exports.getAllTypes = (req, res, next) => {
-    const id = uuidv4();
-    const api = axios.get('https://pokeapi.co/api/v2/type/')
-        .then(response => {
-            let apiRes = response
-            let objeto = apiRes.data.results.map(x => x.name)
-            for (let i = 0; i < objeto.length; i++) {
-                const typeCreated = Type.findOrCreate({
-                    where: {
-                        name: objeto[i],
-                        id: id
-                    }
-                })
-            }
-        })
-        .catch((error) => next(error))
-}
 
+exports.saveTypes = async (req, res, next) => {
+    try {
+        const api = await axios.get('https://pokeapi.co/api/v2/type/')
+        let respuesta = api.data.results
+        for (let i = 0; i < respuesta.length; i++) {
+            const apiRes = await axios.get(`${respuesta[i].url}`)     
+            const typeCreated = Type.findOrCreate({
+                where: {
+                    name: apiRes.data.name,
+                    id: respuesta[i].url.split('/')[6],
+                }
+            })
+          
+        }
+    }catch(error) {
+        next(error);
+    }
+}
+exports.getAllTypes = async (req, res, next) => {
+    Type.findAll()
+  .then(categories => {
+    res.json(categories);
+  })
+};

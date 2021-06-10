@@ -1,5 +1,5 @@
 const { Router} = require('express');
-const {getAllTypes } = require('../controllers/typeController');
+const {getAllTypes, saveTypes } = require('../controllers/typeController');
 const router = Router();
 
 // GET /types:
@@ -8,7 +8,7 @@ const router = Router();
 // guardarlos en su propia base de datos y luego ya utilizarlos desde allí
 
 router.get('/',
-getAllTypes
+getAllTypes 
 );
 
 module.exports = router;

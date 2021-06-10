@@ -20,49 +20,23 @@ exports.addPokemon = async (req, res, next) => {
 };
 
 
-//NO HACE FALTA EL IF
-// exports.getAllPokemons = async (req, res, next) => {
-//     try {
-//         const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
-//         let respuesta = api.data.results
-//         if (!req.query.name) {
-//             let info = [];
-//             for (let i = 0; i < respuesta.length; i++) {
-//                 const apiRes = await axios.get(`${respuesta[i].url}`)
-//                 let object = {
-//                     id: respuesta[i].url.split('/')[6],
-//                     img: apiRes.data.sprites.other.dream_world.front_default,
-//                     name: apiRes.data.name,
-//                     type: apiRes.data.types.map(x => x.type.name),
-//                 }
-//                 info.push(object)
-//             }
-//             res.send(info)
-//         } else {
-//             console.log('NO FUNCIONAAA ')
-//         }
-//     } catch (error) {
-//         next(error);
-//     }
-// };
-
 exports.getAllPokemons = async (req, res, next) => {
     try {
         const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=3')
+        const mine = await Pokemon.findAll();
         let respuesta = api.data.results
-
-            let info = [];
-            for (let i = 0; i < respuesta.length; i++) {
-                const apiRes = await axios.get(`${respuesta[i].url}`)
-                let object = {
-                    id: respuesta[i].url.split('/')[6],
-                    img: apiRes.data.sprites.other.dream_world.front_default,
-                    name: apiRes.data.name,
-                    type: apiRes.data.types.map(x => x.type.name),
-                }
-                info.push(object)
+        let info = [];
+        for (let i = 0; i < respuesta.length; i++) {
+            const apiRes = await axios.get(`${respuesta[i].url}`)
+            let object = {
+                id: respuesta[i].url.split('/')[6],
+                img: apiRes.data.sprites.other.dream_world.front_default,
+                name: apiRes.data.name,
+                type: apiRes.data.types.map(x => x.type.name),
             }
-            res.send(info)
+            info.push(object)
+        }
+        res.send(mine.concat(info))
     } catch (error) {
         next(error);
     }
@@ -87,30 +61,8 @@ exports.getPokemonById = (req, res, next) => {
                     weight: apiRes.data.weight
                 })
         })
-        .catch(err => 
-            res.status(404).send('there isnt a pokemon with that name' ))
+        .catch(err =>
+            res.status(404).send('there isnt a pokemon with that name'))
 };
 
 
-// exports.getPokemonByName = (req, res, next) => {
-//     const api = axios.get(`https://pokeapi.co/api/v2/pokemon/${req.params.id}`)
-//         .then(response => {
-//             let apiRes = response
-//             return res.send(
-//                 {
-//                     id: apiRes.data.id,
-//                     img: apiRes.data.sprites.other.dream_world.front_default,
-//                     name: apiRes.data.name,
-//                     type: apiRes.data.types.map(x => x.type.name),
-//                     HP: apiRes.data.stats[0].base_stat,
-//                     attack: apiRes.data.stats[1].base_stat,
-//                     defense: apiRes.data.stats[2].base_stat,
-//                     speed: apiRes.data.stats[5].base_stat,
-//                     height: apiRes.data.height,
-//                     weight: apiRes.data.weight
-//                 })
-//         })
-//         //REVISAR
-//        .catch(err => 
-//         res.status(404).send({ err: 'there arent a pokemon with that name' }))
-//     };
