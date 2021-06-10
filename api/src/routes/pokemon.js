@@ -1,5 +1,5 @@
 const { Router} = require('express');
-const { getAllPokemons, addPokemon,getPokemonById} = require('../controllers/pokemonController');
+const { getAllPokemons, addPokemon,getPokemonById, getPokemonByName} = require('../controllers/pokemonController');
 const router = Router();
 
 // Área donde se verá el listado de pokemons. Al iniciar deberá cargar los primeros resultados 
@@ -19,5 +19,6 @@ router.get('/:id',
 getPokemonById
 )
 router.get('/:name',
+getPokemonById
 )
 module.exports = router;
