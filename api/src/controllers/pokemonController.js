@@ -20,17 +20,48 @@ exports.addPokemon = async (req, res, next) => {
     }
 };
 
-exports.getAllPokemons = (req, res, next) => {
-    const api = axios.get('https://pokeapi.co/api/v2/pokemon')
-    const created = Pokemon.findAll()
-    Promise.all([api, created])
-        .then((response) => {
-            let [apiRes, createdRes] = response;
-            return res.send(
-                createdRes.concat(apiRes.data.results.map(x => x.name).slice(0, 12))
-            )
-        })
-        .catch((error) => next(error))
+// exports.getAllPokemons = async (req, res, next) => {
+//     try {
+//         info = [];
+//         nombre = req.query.name;
+//         const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
+//         let response = api.data.results
+//         if (!req.params.name)
+//             for (let i = 0; i < response.length; i++) {
+//                 const api2 = axios.get(`${response[i].url}`)
+//                 let object = {
+//                     id: response[i].url.split('/')[6],
+//                     name: api2.data.name,
+//                     img: api2.data.sprites.official - artwork.front_default,
+//                     type: api2.types.map(x => x.type.name)}
+//                 info.push(object)}
+//         return res.send(info);
+//     }
+// }).catch((error) => next(error))
+
+exports.getAllPokemons = async (req, res, next) => {
+    try {
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
+        let respuesta = api.data.results
+        if (!req.query.name) {
+            let info = [];
+            for (let i = 0; i < respuesta.length; i++) {
+                const apiRes = await axios.get(`${respuesta[i].url}`)
+                let object = {
+                    id: respuesta[i].url.split('/')[6],
+                    img: apiRes.data.sprites.other.dream_world.front_default,
+                    name: apiRes.data.name,
+                    type: apiRes.data.types.map(x => x.type.name),
+                }
+                info.push(object)
+            }
+            res.send(info)
+        } else {
+            console.log('NO FUNCIONAAA ')
+        }
+    } catch (error) {
+        next(error);
+    }
 };
 
 
@@ -39,15 +70,18 @@ exports.getPokemonById = (req, res, next) => {
         .then(response => {
             let apiRes = response
             return res.send(
-               {
-                id: apiRes.data.id,
-                img: apiRes.data.sprites.other.dream_world.front_default,
-                name: apiRes.data.name,
-                type: apiRes.data.types.map(x => x.type.name),
-                stats: apiRes.data.stats.filter(item => item.stat),
-                height: apiRes.data.height,
-                weight: apiRes.data.weight
-            })
+                {
+                    id: apiRes.data.id,
+                    img: apiRes.data.sprites.other.dream_world.front_default,
+                    name: apiRes.data.name,
+                    type: apiRes.data.types.map(x => x.type.name),
+                    HP: apiRes.data.stats[0].base_stat,
+                    attack: apiRes.data.stats[1].base_stat,
+                    defense: apiRes.data.stats[2].base_stat,
+                    speed: apiRes.data.stats[5].base_stat,
+                    height: apiRes.data.height,
+                    weight: apiRes.data.weight
+                })
         })
         .catch((error) => next(error))
 };
@@ -63,15 +97,15 @@ exports.getPokemonByName = (req, res, next) => {
         .then(response => {
             let apiRes = response
             return res.send(
-               {
-                id: apiRes.data.id,
-                img: apiRes.data.sprites.other.dream_world.front_default,
-                name: apiRes.data.name,
-                type: apiRes.data.types.map(x => x.type.name),
-                stats: apiRes.data.stats.filter(item => item.stat),
-                height: apiRes.data.height,
-                weight: apiRes.data.weight
-            })
+                {
+                    id: apiRes.data.id,
+                    img: apiRes.data.sprites.other.dream_world.front_default,
+                    name: apiRes.data.name,
+                    type: apiRes.data.types.map(x => x.type.name),
+                    stats: apiRes.data.stats.filter(item => item.stat),
+                    height: apiRes.data.height,
+                    weight: apiRes.data.weight
+                })
         })
         .catch((error) => next(error))
 };
