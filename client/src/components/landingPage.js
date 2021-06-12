@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 
 const Button = styled.button`
   background-color: black ;
@@ -16,12 +16,9 @@ const Button = styled.button`
   overflow: hidden;
   padding: 1.5rem 2rem;
   margin-top: 40rem;
-
   @media (max-width: 992px) {
-      
        margin-top: 15rem;
        }
-
   &:before {
     content: "";
     background-color: rgba(255,255,255,0.5);
@@ -72,16 +69,22 @@ const Phrase = styled.h1`
 // `;
 const LandingPage = () => {
     return (
-        <Fragment>
+      <Fragment>
               
             <Wrapper>
                 <Title>Welcome!</Title>
                 <Phrase>Find your favorite Pokemon character or create your own</Phrase>
             </Wrapper>
             < Wrap>
-                <Button type='submit' >HOME</Button>
+            <Button>
+              <Link to={'/pokemon'}> 
+                   HOME
+                   </Link>
+            </Button>
+          
             </ Wrap>
-        </Fragment>
+            </Fragment>
+      
     );
 }
 

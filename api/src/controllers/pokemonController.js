@@ -18,7 +18,7 @@ exports.addPokemon = async (req, res, next) => {
         next(error);
     }
 };
-
+//select name, 
 
 exports.getAllPokemons = async (req, res, next) => {
     try {
