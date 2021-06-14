@@ -6,6 +6,19 @@ const { v4: uuidv4 } = require('uuid');
 
 exports.addPokemon = async (req, res, next) => {
     const id = uuidv4();
+    const {name, healthpoints, attack, defense, speed, height, weight} = req.body
+
+    const newPokemon = await Activity.findOrCreate({
+        where: {
+            name,
+            healthpoints,
+            attack, 
+            defense, 
+            speed, 
+            height, 
+            weight
+        }
+    })
     const pokemonBody = {
         ...req.body,
         id
@@ -23,7 +36,9 @@ exports.addPokemon = async (req, res, next) => {
 exports.getAllPokemons = async (req, res, next) => {
     try {
         const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=3')
-        const mine = await Pokemon.findAll();
+        const mine = await Pokemon.findAll({
+            attributes: ['id', 'name']
+        });
         let respuesta = api.data.results
         let info = [];
         for (let i = 0; i < respuesta.length; i++) {
@@ -36,12 +51,11 @@ exports.getAllPokemons = async (req, res, next) => {
             }
             info.push(object)
         }
-        res.send(mine.concat(info))
+        res.send(info.concat(mine))
     } catch (error) {
         next(error);
     }
 };
-
 
 exports.getPokemonById = (req, res, next) => {
     const api = axios.get(`https://pokeapi.co/api/v2/pokemon/${req.params.id}`)

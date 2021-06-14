@@ -71,3 +71,6 @@ To access this in your express server is pretty simple too;
    console.log(req.query.page) // 10
   })
 ```
+
+
+useParams() 
