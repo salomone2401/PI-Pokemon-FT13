@@ -22,7 +22,6 @@ const IdPokemon = () => {
   // [ ] Altura y peso
 
   if (pokemonDetail === null) {
-
     return (
       <h1>Usuario no encontrado</h1>
     )

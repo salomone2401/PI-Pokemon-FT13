@@ -74,3 +74,20 @@ To access this in your express server is pretty simple too;
 
 
 useParams() 
+Ruta principal: debe contener
+
+[ ] Input de búsqueda para encontrar pokemons por nombre (La búsqueda será exacta, es decir solo encontrará al pokemon si se coloca el nombre completo)  HECHO
+[ ] Área donde se verá el listado de pokemons. Al iniciar deberá cargar los primeros resultados obtenidos desde la ruta GET /pokemons y deberá mostrar su:
+Imagen
+Nombre
+Tipos (Electrico, Fuego, Agua, etc) ((FALTA LOS POKEMONS DE LA BASE DE DATOS))
+[ ] Botones/Opciones para filtrar por tipo de pokemon y por pokemon existente o creado por nosotros
+[ ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los pokemons por orden alfabético y por fuerza
+[ ] Paginado para ir buscando y mostrando los siguientes pokemons
+
+
+
+me trae el listado ((FALTA ARREGLAR LOS OBJETOS CREADOS POR EL USUARIO))
+[ ] GET /pokemons:
+Obtener un listado de los primeros 12 pokemons desde pokeapi
+Debe devolver solo los datos necesarios para la ruta principal

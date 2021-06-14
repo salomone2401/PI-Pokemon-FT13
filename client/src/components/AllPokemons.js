@@ -1,43 +1,55 @@
 import React, { useEffect, useState } from 'react';
-
 //redux
 import { useDispatch, useSelector } from 'react-redux';
 import { getPokemonsAction } from '../actions/pokemonsAction';
+import Types from './Types';
+
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import NamePokemon from './NamePokemon';
+
 
 
 const AllPokemons = () => {
-
-  //mostrar todos los pokemons
   const dispatch = useDispatch();
   const pokemons = useSelector(state => state.pokemons);
 
-  useEffect(() => {
 
+
+
+  useEffect(() => {
     dispatch(getPokemonsAction());
     // eslint-disable-next-line
   }, [dispatch])
 
-  //obtener el state
-
 
   return (
     <div>
-      <ul>
-        {
-          Array.isArray(pokemons) ? pokemons.map(pokemon => (
+      <Types />
+      <input
+        name="name"
+        type="text"
+        value={name}
+        placeholder="Search By Name"
+        onChange={handleChange}
+      />
+      <NamePokemon />
 
-              <li key={pokemon.id}>
-                    
-              <li>{pokemon.id}</li>
-              <li>{pokemon.name}</li>
-              <li>{pokemon.type}</li>
+      {/* {
+          Array.isArray(pokemons) ? pokemons.map(pokemon => (
+           
+            <Link to={`/pokemon/${pokemon.id}`}>
+             <div>
+              <span key={pokemon.id} />
+              <span>{pokemon.id}</span>
+              <span>{pokemon.name}</span>
+              <span>{pokemon.type}</span>
               <img src={pokemon.img} alt="pokemon character" />
-        
-              </li>
-          
+              </div>
+              </Link>
           )) : <h1>Cargando...</h1>
-        }
-      </ul>
+        } */}
+
     </div>
   )
 }

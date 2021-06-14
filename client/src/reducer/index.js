@@ -1,11 +1,15 @@
 import {
     GET_ALL_POKEMONS,
-    GET_POKEMON_DETAIL
+    GET_POKEMON_DETAIL,
+    GET_POKEMON_NAME,
+    GET_TYPES
 }from '../types';
 
 const initialState = {
     pokemons: undefined,
-    pokemonDetail: undefined
+    pokemonDetail: undefined,
+    types: undefined,
+    pokemonName: undefined
 }
 
 
@@ -20,7 +24,18 @@ function rootReducer(state = initialState, action) {
         case GET_POKEMON_DETAIL:
             return{
                 ...state,
-                pokemonDetail: action.payload
+                pokemonDetail: action.payload 
+            }
+        case GET_POKEMON_NAME:
+            return{
+                ...state,
+                pokemonName: action.payload
+                }
+
+        case GET_TYPES:
+            return{
+                ...state,
+                types: action.payload
             }
         default:
             return state;

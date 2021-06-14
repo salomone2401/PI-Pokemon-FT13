@@ -1,24 +1,44 @@
 const { Pokemon } = require('../db')
 const axios = require('axios')
 const { v4: uuidv4 } = require('uuid');
+const Type = require('../models/Type');
 
+
+
+// exports.addPokemon = async (req, res, next) => {
+//     const id = uuidv4();
+//     const {name, healthpoints, attack, defense, speed, height, weight, type} = req.body
+//     try {
+//     const newPokemon = await Pokemon.findOrCreate({
+//         where: {
+//             name,
+//             healthpoints,
+//             attack, 
+//             defense, 
+//             speed, 
+//             height, 
+//             weight
+//         }
+//     })
+//     for (let i = 0; i < type.length; i++) {
+//        let typen = await Type.findAll({
+//            where: {
+//                name: type[i]
+//            }
+//        })
+//        await newPokemon[0].addPokemon(typen)
+        
+//     }
+//         return res.send('pokemon created');
+//     } catch (error) {
+//         next(error);
+//     }
+// };
+// select name, 
 
 
 exports.addPokemon = async (req, res, next) => {
     const id = uuidv4();
-    const {name, healthpoints, attack, defense, speed, height, weight} = req.body
-
-    const newPokemon = await Activity.findOrCreate({
-        where: {
-            name,
-            healthpoints,
-            attack, 
-            defense, 
-            speed, 
-            height, 
-            weight
-        }
-    })
     const pokemonBody = {
         ...req.body,
         id
@@ -31,7 +51,7 @@ exports.addPokemon = async (req, res, next) => {
         next(error);
     }
 };
-//select name, 
+
 
 exports.getAllPokemons = async (req, res, next) => {
     try {
