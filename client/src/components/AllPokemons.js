@@ -26,16 +26,9 @@ const AllPokemons = () => {
   return (
     <div>
       <Types />
-      <input
-        name="name"
-        type="text"
-        value={name}
-        placeholder="Search By Name"
-        onChange={handleChange}
-      />
       <NamePokemon />
 
-      {/* {
+      {
           Array.isArray(pokemons) ? pokemons.map(pokemon => (
            
             <Link to={`/pokemon/${pokemon.id}`}>
@@ -48,7 +41,7 @@ const AllPokemons = () => {
               </div>
               </Link>
           )) : <h1>Cargando...</h1>
-        } */}
+        }
 
     </div>
   )

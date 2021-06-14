@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { getPokemonName} from '../actions/pokemonsAction';
-
+import { getPokemonName, getPokemonsAction } from '../actions/pokemonsAction';
+import { useHistory } from 'react-router';
 const NamePokemon = () => {
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const [nombre, setName] = useState({
-   name: ''
+    name: ''
   });
   // // //producto a editar
   const pokemonName = useSelector(state => state.pokemonName);
-
   //funcion que coloca los elementos en el state
   const handleChange = e => {
     setName({
@@ -21,30 +20,27 @@ const NamePokemon = () => {
     })
   }
 
-  const {name} = nombre;
-  console.log(name)
-  //llenar el state automaticamente
-  useEffect(() => {
-    dispatch(getPokemonName(name));
-    // eslint-disable-next-line
-  }, [dispatch, name])
+  const { name } = nombre;
 
-
-console.log(pokemonName)
-
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch(getPokemonName(name))
+    history.push(`/pokemon/${name}`);
+  }
   return (
-  
-       <div>
-        <li>{pokemonName.id}</li>
-        <li>{pokemonName.name}</li>
-        <img src={pokemonName.img} alt="pokemon character" />
-        <li>{pokemonName.type}</li>
-        <li>{pokemonName.HP}</li>
-        <li>{pokemonName.attack}</li>
-        <li>{pokemonName.defense}</li>
-        <li>{pokemonName.height}</li>
-        <li>{pokemonName.weight}</li>
-      </div>
+    <div>
+      <form
+        onSubmit={handleSubmit}>
+        <input
+          name="name"
+          type="text"
+          value={name}
+          placeholder="Search By Name"
+          onChange={handleChange}
+        />
+        <button type='submit'>Search</button>
+      </form>
+    </div>
   );
 }
 
