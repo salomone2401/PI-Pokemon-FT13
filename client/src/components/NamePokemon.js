@@ -1,17 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
-import { getPokemonName, getPokemonsAction } from '../actions/pokemonsAction';
+import { getPokemonName } from '../actions/pokemonsAction';
 import { useHistory } from 'react-router';
+import styled from 'styled-components';
+
+
+const Bar = styled.input`   
+   padding: 1rem 1rem;
+   border: 1px solid #000000;
+    border-radius:5px;
+
+   
+
+`;
+
+const Button = styled.button`  
+   background-color: #C3F73A;
+   border: 1px solid #000000;
+    border-radius:2px;
+    padding: 1rem 1rem;
+  
+  
+`;
+
+const Container = styled.div`  
+    margin: 2rem;
+    text-align: center;
+
+
+`;
+
+
 const NamePokemon = () => {
+
   const dispatch = useDispatch();
   const history = useHistory();
+
   const [nombre, setName] = useState({
     name: ''
   });
-  // // //producto a editar
-  const pokemonName = useSelector(state => state.pokemonName);
   //funcion que coloca los elementos en el state
   const handleChange = e => {
     setName({
@@ -31,14 +58,16 @@ const NamePokemon = () => {
     <div>
       <form
         onSubmit={handleSubmit}>
-        <input
-          name="name"
-          type="text"
-          value={name}
-          placeholder="Search By Name"
-          onChange={handleChange}
-        />
-        <button type='submit'>Search</button>
+        <Container>
+          <Bar
+            name="name"
+            type="text"
+            value={name}
+            placeholder="Type to search"
+            onChange={handleChange}
+          />
+          <Button type='submit'>Search</Button>
+        </Container>
       </form>
     </div>
   );

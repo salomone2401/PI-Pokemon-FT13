@@ -55,7 +55,7 @@ exports.addPokemon = async (req, res, next) => {
 
 exports.getAllPokemons = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=3')
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=5')
         const mine = await Pokemon.findAll({
             attributes: ['id', 'name']
         });
@@ -67,7 +67,7 @@ exports.getAllPokemons = async (req, res, next) => {
                 id: respuesta[i].url.split('/')[6],
                 img: apiRes.data.sprites.other.dream_world.front_default,
                 name: apiRes.data.name,
-                type: apiRes.data.types.map(x => x.type.name),
+                type: apiRes.data.types.map(e => e.type.name)
             }
             info.push(object)
         }

@@ -1,8 +1,31 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPokemonDetail } from '../actions/pokemonsAction';
-
 import { useParams } from "react-router-dom";
+import styled from 'styled-components';
+import Header from './Header';
+
+const Container = styled.div`
+display: grid;
+grid-template-columns: 30% 70%;
+text-align: center;
+`;
+
+const Text = styled.p`
+color: orange;
+font-size: 4rem;
+margin-left: 1rem;
+`;
+const Image = styled.div`
+text-align: center;
+`;
+
+const Body = styled.div`
+width: 100%;
+background-color: #F4B2A3;
+margin-bottom: 0;
+
+`;
 
 const IdPokemon = () => {
 
@@ -16,30 +39,31 @@ const IdPokemon = () => {
     // eslint-disable-next-line
   }, [dispatch, id])
 
-  // [ ] Los campos mostrados en la ruta principal para cada pokemon (imagen, nombre y tipos)
-  // [ ] Número de Pokemon (id)
-  // [ ] Estadísticas (vida, fuerza, defensa, velocidad)
-  // [ ] Altura y peso
-
-  if (pokemonDetail === null) {
-    return (
-      <h1>Usuario no encontrado</h1>
-    )
-  } else if (pokemonDetail === undefined) {
-    return (<h1>Cargando...</h1>)
+  if (pokemonDetail === null || pokemonDetail === undefined) {
+    return ( <h1>Usuario no encontrado</h1>)
   } else {
+
     return (
-      <div>
-        <li>{pokemonDetail.id}</li>
-        <li>{pokemonDetail.name}</li>
-        <img src={pokemonDetail.img} alt="pokemon character" />
-        <li>{pokemonDetail.type}</li>
-        <li>{pokemonDetail.HP}</li>
-        <li>{pokemonDetail.attack}</li>
-        <li>{pokemonDetail.defense}</li>
-        <li>{pokemonDetail.height}</li>
-        <li>{pokemonDetail.weight}</li>
-      </div>)
+      <>
+      <Header/>
+      <Body>
+
+        <Image>
+          <span>#{pokemonDetail.id}</span>
+          <img src={pokemonDetail.img} alt="pokemon character" />
+        </Image>
+        <Container>
+
+          <p>{pokemonDetail.type.join(' ')}</p>
+          <p><span>Name:</span>{pokemonDetail.name}</p>
+          <p><span>Health Points:</span>{pokemonDetail.HP}</p>
+          <p><span>Attack:</span>{pokemonDetail.attack}</p>
+          <p><span>Defense:</span>{pokemonDetail.defense}</p>
+          <p><span>height:</span>{pokemonDetail.height}</p>
+          <p><span>Weight:</span>{pokemonDetail.weight}</p>
+        </Container>
+      </Body>
+      </>)
   }
 }
 

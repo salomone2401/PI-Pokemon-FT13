@@ -1,6 +1,6 @@
 import {
    GET_TYPES,
-   SHOW_TYPES
+   SHOW_TYPES_POKEMONS
 }
 from '../types';
 
@@ -19,5 +19,9 @@ export function getType(){
         }
     }
 }
+
+
+
+
 
 

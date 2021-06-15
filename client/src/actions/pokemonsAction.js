@@ -1,7 +1,8 @@
 import {
     GET_ALL_POKEMONS,
     GET_POKEMON_DETAIL,
-    GET_POKEMON_NAME
+    GET_POKEMON_NAME,
+    GET_TYPES_POKEMONS
 } from '../types';
 
 import clientAxios from '../config/axios';
@@ -42,6 +43,21 @@ export function getPokemonName(name) {
                 payload: res.data
             });
         } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+
+
+export function getPokemonByType(type){
+    return async (dispatch) => {
+        try{
+            const res = await clientAxios.get('/pokemon/');
+            dispatch({
+                type:GET_TYPES_POKEMONS,
+                payload: type });
+        }catch (error){
             console.log(error)
         }
     }
