@@ -4,12 +4,13 @@ const { v4: uuidv4 } = require('uuid');
 const { Type } = require('../db')
 
 
-exports.agregarPokemon = async (req, res, next) => {
+exports.addNewPokemon = async (req, res, next) => {
     const id = uuidv4();
     const { name, healthpoints, attack, defense, speed, height, weight, type } = req.body
     // try {
     const newPokemon = await Pokemon.findOrCreate({
         where: {
+
             id,
             name,
             healthpoints,
@@ -20,10 +21,15 @@ exports.agregarPokemon = async (req, res, next) => {
             weight
         }
     })
+    
     let typePokemon = await Type.findAll({
         where: {
             name: type
-        }
+        },
+        default: {
+            name: type
+          }
+
     })
     await newPokemon[0].addTypes(typePokemon)
     res.send('pokemon created')
@@ -33,7 +39,7 @@ exports.agregarPokemon = async (req, res, next) => {
 
 exports.getAllPokemons = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=13')
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
         const mine = await Pokemon.findAll({
             attributes: ['id', 'name']
         });

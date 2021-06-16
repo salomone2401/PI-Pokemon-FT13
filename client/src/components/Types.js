@@ -23,16 +23,8 @@ const Types = () => {
   }
   useEffect(() => {
     dispatch(getType());
-     dispatch(getPokemonByType(Object.values(type).toString()))
+    dispatch(getPokemonByType(Object.values(type).toString()))
   }, [dispatch])
-
-
-// const filter = () =>{ 
-//   Array.isArray(pokemons) ? pokemons.filter(pokemon =>{
-//     return pokemon.type == Object.values(type).toString()
-//   })  
-//     : null
-// }
 
 
   const handleSubmit = e => {

@@ -54,12 +54,12 @@ const IdPokemon = () => {
         </Image>
         <Container>
 
-          <p>{pokemonDetail.type.join(' ')}</p>
+          <p>{pokemonDetail.type.join(',')}</p>
           <p><span>Name:</span>{pokemonDetail.name}</p>
           <p><span>Health Points:</span>{pokemonDetail.HP}</p>
           <p><span>Attack:</span>{pokemonDetail.attack}</p>
           <p><span>Defense:</span>{pokemonDetail.defense}</p>
-          <p><span>height:</span>{pokemonDetail.height}</p>
+          <p><span>Height:</span>{pokemonDetail.height}</p>
           <p><span>Weight:</span>{pokemonDetail.weight}</p>
         </Container>
       </Body>

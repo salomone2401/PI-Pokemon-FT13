@@ -9,9 +9,6 @@ const Bar = styled.input`
    padding: 1rem 1rem;
    border: 1px solid #000000;
     border-radius:5px;
-
-   
-
 `;
 
 const Button = styled.button`  
@@ -19,7 +16,6 @@ const Button = styled.button`
    border: 1px solid #000000;
     border-radius:2px;
     padding: 1rem 1rem;
-  
   
 `;
 
