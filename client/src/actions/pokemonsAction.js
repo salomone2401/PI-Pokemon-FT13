@@ -50,13 +50,14 @@ export function getPokemonName(name) {
 
 
 
-export function getPokemonByType(type){
+export function getPokemonByType(payload){
     return async (dispatch) => {
         try{
             const res = await clientAxios.get('/pokemon/');
-            dispatch({
+            console.log(dispatch({
                 type:GET_TYPES_POKEMONS,
-                payload: type });
+                payload
+            }))
         }catch (error){
             console.log(error)
         }

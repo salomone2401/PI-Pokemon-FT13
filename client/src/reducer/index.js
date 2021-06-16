@@ -4,13 +4,13 @@ import {
     GET_POKEMON_NAME,
     GET_TYPES,
     GET_TYPES_POKEMONS
-}from '../types';
+} from '../types';
 
 const initialState = {
     pokemons: undefined,
     pokemonDetail: undefined,
     types: undefined,
-    pokemonName: undefined
+    pokemonName: undefined,
 }
 
 
@@ -18,35 +18,35 @@ const initialState = {
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_POKEMONS:
-            return{
+            return {
                 ...state,
                 pokemons: action.payload
             }
         case GET_POKEMON_DETAIL:
-            return{
+            return {
                 ...state,
-                pokemonDetail: action.payload 
+                pokemonDetail: action.payload
             }
         case GET_POKEMON_NAME:
-            return{
+            return {
                 ...state,
                 pokemonName: action.payload
-                }
+            }
 
         case GET_TYPES:
-            return{
+            return {
                 ...state,
                 types: action.payload
             }
         case GET_TYPES_POKEMONS:
-            return{
+            return {
                 ...state,
                 pokemons: state.pokemons.filter(pokemon =>
-                    pokemon.type === action.payload.type)
-                }
+              pokemon.type == action.payload) 
+            }
         default:
             return state;
-        }
     }
+}
 
 export default rootReducer;

@@ -10,8 +10,6 @@ import NamePokemon from './NamePokemon';
 import Header from './Header';
 
 
-
-
 const Container = styled.div`
    display: grid;
     /* grid-template-columns: repeat(2, 1fr); */

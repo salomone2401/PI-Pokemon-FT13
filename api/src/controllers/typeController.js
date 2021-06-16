@@ -1,10 +1,6 @@
 const axios = require('axios')
 const { Type } = require('../db')
-const { response } = require('express');
 const { v4: uuidv4 } = require('uuid');
-
-
-
 
 exports.saveTypes = async (req, res, next) => {
     try {
@@ -18,12 +14,12 @@ exports.saveTypes = async (req, res, next) => {
                     id: respuesta[i].url.split('/')[6],
                 }
             })
-          
         }
     }catch(error) {
         next(error);
     }
 }
+
 exports.getAllTypes = async (req, res, next) => {
     Type.findAll()
   .then(categories => {

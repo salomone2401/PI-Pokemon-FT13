@@ -11,9 +11,8 @@ const Types = () => {
   const dispatch = useDispatch();
 
 
-  const pokemons = useSelector(state => state.pokemons);
   const types = useSelector(state => state.types);
-
+  const pokemons = useSelector(state => state.pokemons);
 
 
   const handleChange = e => {
@@ -24,16 +23,22 @@ const Types = () => {
   }
   useEffect(() => {
     dispatch(getType());
-   
+     dispatch(getPokemonByType(Object.values(type).toString()))
   }, [dispatch])
 
-  console.log(type);
+
+// const filter = () =>{ 
+//   Array.isArray(pokemons) ? pokemons.filter(pokemon =>{
+//     return pokemon.type == Object.values(type).toString()
+//   })  
+//     : null
+// }
+
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(getPokemonByType(type));
+    dispatch(getPokemonByType(Object.values(type).toString()))
   }
-
   return (
     <form
       onSubmit={handleSubmit}>
@@ -54,8 +59,8 @@ const Types = () => {
         </select>
         <button type='submit'>Filt</button>
       </div>
-
     </form>
+
   );
 }
 
