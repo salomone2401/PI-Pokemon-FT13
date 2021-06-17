@@ -8,9 +8,10 @@ exports.addNewPokemon = async (req, res, next) => {
     const id = uuidv4();
     const { name, healthpoints, attack, defense, speed, height, weight, type } = req.body
     // try {
+        console.log('IMPRIM NOMBRE',type)
+
     const newPokemon = await Pokemon.findOrCreate({
         where: {
-
             id,
             name,
             healthpoints,
@@ -39,7 +40,7 @@ exports.addNewPokemon = async (req, res, next) => {
 
 exports.getAllPokemons = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=3')
         const mine = await Pokemon.findAll({
             attributes: ['id', 'name']
         });
@@ -47,8 +48,6 @@ exports.getAllPokemons = async (req, res, next) => {
         let info = [];
         for (let i = 0; i < respuesta.length; i++) {
             const apiRes = await axios.get(`${respuesta[i].url}`)
-
-
             let object = {
                 id: respuesta[i].url.split('/')[6],
                 img: apiRes.data.sprites.other.dream_world.front_default,

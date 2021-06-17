@@ -83,10 +83,10 @@ export function getPokemonByType(payload){
     return async (dispatch) => {
         try{
             const res = await clientAxios.get('/pokemon/');
-            console.log(dispatch({
+            dispatch({
                 type:GET_TYPES_POKEMONS,
                 payload
-            }))
+            })
         }catch (error){
             console.log(error)
         }
@@ -97,11 +97,12 @@ export function getPokemonByType(payload){
 
 
 export function createNewPokemon(pokemon, type) {
+    console.log('pPOKEMON', type)
     return async (dispatch) => {
-       
+    
         dispatch(addPokemon());
         try {
-          await clientAxios.post('/pokemon', pokemon, type);
+          await clientAxios.post('/pokemon', {...pokemon, type});
            
             dispatch(addPokemonSuccess(pokemon, type))
         } catch (error) {

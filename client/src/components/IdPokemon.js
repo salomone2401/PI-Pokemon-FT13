@@ -12,19 +12,27 @@ text-align: center;
 `;
 
 const Text = styled.p`
-color: orange;
-font-size: 4rem;
-margin-left: 1rem;
+    color: orange;
+    font-size: 4rem;
+    margin-left: 1rem;
 `;
 const Image = styled.div`
-text-align: center;
+    text-align: center;
 `;
 
 const Body = styled.div`
-width: 100%;
-background-color: #F4B2A3;
-margin-bottom: 0;
+    width: 100%;
+    background-color: #F4B2A3;
+    margin-bottom: 0;
 
+`;
+
+const Button = styled.a`
+font-size: 1rem;
+text-decoration: none;
+color: black;
+background-color: yellowgreen;
+padding: 1rem;
 `;
 
 const IdPokemon = () => {
@@ -40,7 +48,7 @@ const IdPokemon = () => {
   }, [dispatch, id])
 
   if (pokemonDetail === null || pokemonDetail === undefined) {
-    return ( <h1>Usuario no encontrado</h1>)
+    return ( <h1>That pokemondoesnt exist</h1>)
   } else {
 
     return (
@@ -63,6 +71,8 @@ const IdPokemon = () => {
           <p><span>Weight:</span>{pokemonDetail.weight}</p>
         </Container>
       </Body>
+      <Button href="/pokemon">&laquo; BACK TO MAIN PAGE</Button>
+
       </>)
   }
 }

@@ -31,5 +31,5 @@ module.exports = (sequelize) => {
     weight: {
       type: DataTypes.INTEGER  
     }
-  });
+  }); 
 };

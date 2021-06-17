@@ -10,8 +10,8 @@ const NewPokemon = ({ history }) => {
 
   const types = useSelector(state => state.types);
 
-   const loading = useSelector(state => state.loading);
-   const error = useSelector(state => state.error);
+  const loading = useSelector(state => state.loading);
+  const error = useSelector(state => state.error);
 
   useEffect(() => {
     dispatch(getType());
@@ -28,9 +28,10 @@ const NewPokemon = ({ history }) => {
   })
 
 
- const [type, setType] = useState([])
+  const [type, setType] = useState([])
+  const [image, setImage] = useState('')
 
-  const { name, healthpoints, attack, defense, speed, height, weight} = pokemon;
+  const { name, healthpoints, attack, defense, speed, height, weight } = pokemon;
 
   const handleChange = e => {
     setPokemon({
@@ -38,16 +39,24 @@ const NewPokemon = ({ history }) => {
       [e.target.name]: e.target.value
     })
   }
-  const handle = e =>{
+  const handleType = e => {
     setType([
       ...type,
-        [e.target.name]= e.target.value
+      [e.target.name] = e.target.value
+    ])
+  }
+
+  const handleImage= e => {
+    setImage([
+      ...image,
+      [e.target.name] = e.target.value
     ])
   }
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(dispatch(createNewPokemon(pokemon, type)))
+    
+    dispatch(createNewPokemon(pokemon, type))
     history.push('/pokemon');
   }
 
@@ -80,7 +89,7 @@ const NewPokemon = ({ history }) => {
           name='attack'
           value={attack}
         />
-         <input
+        <input
           type="number"
           placeholder="Speed"
           onChange={handleChange}
@@ -109,32 +118,41 @@ const NewPokemon = ({ history }) => {
           name='weight'
           value={weight}
         />
+        <input
+          type="url"
+          name="url"
+          placeholder="https://example.com"
+          pattern="https://.*"
+          size="30"
+          required
+          onChange={handleImage}
+        />
         <p>choose a type</p>
-      { error ? <p>hay un error</p> : null }
+        {error ? <p>hay un error</p> : null}
         {
-           
+
           Array.isArray(types) ? types.map(type => (
             <div>
-            <label>{type.name}</label>
-            <input 
-            key={type.id}
-            type="radio"
-            value={type.name}
-            name='type' 
-            onChange={handle}
-          />
-          </div>
+              <label>{type.name}</label>
+              <input
+                key={type.id}
+                type="radio"
+                value={type.name}
+                name='type'
+                onChange={handleType}
+              />
+            </div>
           )) : null
         }
-      
+
         <button
           type='submit'
-         
+
         >Create</button>
       </form>
-      { loading ? <p>Cargando...</p> : null }
-                        
-                        { error ? <p>{error}</p> : null }
+      { loading ? <p>Cargando...</p> : null}
+
+      { error ? <p>{error}</p> : null}
     </>
   );
 }
