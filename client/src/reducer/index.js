@@ -8,7 +8,11 @@ import {
     GET_TYPES_POKEMONS,
     CREATE_POKEMON,
     CREATE_POKEMON_SUCCESS,
-    CREATE_POKEMON_ERROR
+    CREATE_POKEMON_ERROR,
+    ORDER_NAME_ASC,
+    ORDER_NAME_DESC,
+    ORDER_ATTACK_ASC,
+    ORDER_ATTACK_DESC
 } from '../types';
 
 const initialState = {
@@ -35,11 +39,11 @@ function rootReducer(state = initialState, action) {
                 pokemons: action.payload
             }
         case GET_POKEMONS_ERROR:
-            return{
+            return {
                 ...state,
                 loading: false,
                 error: action.payload
-                }
+            }
         case GET_POKEMON_DETAIL:
             return {
                 ...state,
@@ -60,26 +64,50 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 pokemons: state.pokemons.filter(pokemon =>
-              pokemon.type == action.payload) 
+                    pokemon.type == action.payload)
             }
-            case CREATE_POKEMON:
-                return{
-                    ...state,
-                    loading: action.payload
-                }
-                case CREATE_POKEMON_SUCCESS:
-                    return{
-                        ...state,
-                        loading: false,
-                        pokemons: action.payload
-                    }
-                case CREATE_POKEMON_ERROR:
-                    return{
-                        ...state,
-                        loading: false,
-                        error: action.payload
-                        }
-                
+        case CREATE_POKEMON:
+            return {
+                ...state,
+                loading: action.payload
+            }
+        case CREATE_POKEMON_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                pokemons: action.payload
+            }
+        case CREATE_POKEMON_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case ORDER_NAME_ASC:{
+            return{
+                ...state,
+                pokemons: action.payload.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+            }
+        }
+        case ORDER_NAME_DESC:{
+            return{
+                ...state,
+                pokemons: action.payload.sort((a,b) => (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0))
+            }
+        }
+        case ORDER_ATTACK_ASC:{
+            return{
+                ...state,
+                pokemons: action.payload
+            }
+        }
+        case ORDER_ATTACK_DESC:{
+            return{
+                ...state,
+                pokemons: action.payload
+            }
+        }
+
         default:
             return state;
     }

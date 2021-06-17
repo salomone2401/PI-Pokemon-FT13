@@ -7,7 +7,11 @@ import {
     GET_TYPES_POKEMONS,
     CREATE_POKEMON,
     CREATE_POKEMON_SUCCESS,
-    CREATE_POKEMON_ERROR
+    CREATE_POKEMON_ERROR,
+    ORDER_NAME_ASC,
+    ORDER_NAME_DESC,
+    ORDER_ATTACK_ASC,
+    ORDER_ATTACK_DESC
 
 } from '../types';
 
@@ -26,14 +30,10 @@ export function getPokemonsAction() {
         }
     }
 }
-
-
-
 const downloadPokemons = () =>({
     type: GET_ALL_POKEMONS,
     payload: true
 });
-
 
 const downloadPokemonsSuccess = pokemons => ({
     type: GET_POKEMONS_SUCCESS,
@@ -117,7 +117,6 @@ const addPokemon = () => ({
     type: CREATE_POKEMON,
     payload: true
 });
-
 const addPokemonSuccess = (pokemon, type) => ({
     type: CREATE_POKEMON_SUCCESS,
     payload: {
@@ -126,9 +125,70 @@ const addPokemonSuccess = (pokemon, type) => ({
     }
 });
 
-
-//si hubo un error
 const addPokemonError = estado => ({
     type: CREATE_POKEMON_ERROR,
     payload: estado
 });
+
+
+
+
+export function orderNameAsc() {
+    return async (dispatch) => {
+        try {
+            const res = await clientAxios.get('/pokemon/');
+            dispatch({
+                type: ORDER_NAME_ASC,
+                payload: res.data
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export function orderNameDesc() {
+    return async (dispatch) => {
+        try {
+            const res = await clientAxios.get('/pokemon/');
+            dispatch({
+                type: ORDER_NAME_DESC,
+                payload: res.data
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+
+export function orderAttackAsc() {
+    return async (dispatch) => {
+        try {
+            const res = await clientAxios.get('/pokemon/orderAsc');
+            dispatch({
+                type: ORDER_ATTACK_ASC,
+                payload: res.data
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export function orderAttackDesc() {
+    return async (dispatch) => {
+        try {
+            const res = await clientAxios.get('/pokemon/orderDesc');
+            dispatch({
+                type: ORDER_ATTACK_DESC,
+                payload: res.data
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}

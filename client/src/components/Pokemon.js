@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import myImage from '../img/log.png';
 
 
 
@@ -35,7 +36,9 @@ const Pokemon = ({ pokemon }) => {
                 <span>{id}</span>
                 <span>{name}</span>
                 <span>{type}</span>
-                <Image src={img} alt="pokemon character" />
+                {img ? <Image src={img} alt="pokemon character" /> 
+                :  <Image src={`${myImage}`} alt="pokemon" />
+                    }
             </Card>
         </Link>
         </Container>

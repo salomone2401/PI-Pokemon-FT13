@@ -9,7 +9,10 @@ import Pagination from './Pagination';
 import { getPokemonsAction } from '../actions/pokemonsAction';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import OrderByNameAsc from './Order/OrderByNameAsc';
+import OrderByNameDesc from './Order/OrderByNameDesc';
+import OrderByAttackAsc from './Order/OrderByAttackAsc';
+import OrderByAttackDesc from './Order/OrderByAttackDesc';
 
 const Container = styled.div`
    display: grid;
@@ -28,7 +31,7 @@ const Pokemons = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonsPerPage] = useState(12)
-  
+
   useEffect(() => {
     dispatch(getPokemonsAction());
     // eslint-disable-next-line
@@ -44,34 +47,43 @@ const Pokemons = () => {
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
   return (
-   <>
+    <>
       <Header />
+      <fieldset className="text-center">
+        <legend>Order by...</legend>
+        <OrderByNameAsc />
+        <OrderByNameDesc />
+        <OrderByAttackAsc />
+        <OrderByAttackDesc />
+
+
+      </fieldset>
+
       <Types />
       <NamePokemon />
 
-  
-        <Link to={'/new'}>nuevo </Link>
-   
+      <Link to={'/new'}>nuevo </Link>
+
       { error ? <p>There was a mistake</p> : null}
 
       { loading ? <p >Loading...</p> : null}
       <Container>
-      {
-        Array.isArray(pokemons) ? 
-          pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon).map(pokemon => (
-          <Pokemon
-            key={pokemon.id}
-           pokemon={pokemon}
-          />
-        )): <p >There is no pokemonss</p>
-      }
-        </Container>
-        <Pagination
-       pokemonsPerPage={pokemonsPerPage}
+        {
+          Array.isArray(pokemons) ?
+            pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon).map(pokemon => (
+              <Pokemon
+                key={pokemon.id}
+                pokemon={pokemon}
+              />
+            )) : <p >There is no pokemonss</p>
+        }
+      </Container>
+      <Pagination
+        pokemonsPerPage={pokemonsPerPage}
         paginate={paginate}
-      /> 
-    
-      </>
+      />
+
+    </>
   )
 }
 export default Pokemons;

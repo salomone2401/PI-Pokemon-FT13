@@ -7,31 +7,13 @@ const { Type } = require('../db')
 exports.addNewPokemon = async (req, res, next) => {
     const id = uuidv4();
     const { name, healthpoints, attack, defense, speed, height, weight, type } = req.body
-    // try {
-        console.log('IMPRIM NOMBRE',type)
-
     const newPokemon = await Pokemon.findOrCreate({
-        where: {
-            id,
-            name,
-            healthpoints,
-            attack,
-            defense,
-            speed,
-            height,
-            weight
-        }
+        where: { id, name, healthpoints, attack, defense, speed, height, weight}
     })
-    
-    let typePokemon = await Type.findAll({
-        where: {
-            name: type
-        },
-        default: {
-            name: type
-          }
 
-    })
+    let typePokemon = await Type.findAll({
+        where: { name: type },
+        default: { name: type } })
     await newPokemon[0].addTypes(typePokemon)
     res.send('pokemon created')
 }
@@ -40,7 +22,7 @@ exports.addNewPokemon = async (req, res, next) => {
 
 exports.getAllPokemons = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=3')
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=4')
         const mine = await Pokemon.findAll({
             attributes: ['id', 'name']
         });
@@ -56,7 +38,6 @@ exports.getAllPokemons = async (req, res, next) => {
             }
             info.push(object)
         }
-
         res.send(info.concat(mine))
     } catch (error) {
         next(error);
@@ -86,3 +67,101 @@ exports.getPokemonById = (req, res, next) => {
 };
 
 
+
+exports.OrderAscAttack = async (req, res, next) => {
+    try {
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=4')
+        const mine = await Pokemon.findAll({
+            order: [
+                ['attack', 'DESC'],
+            ],
+            attributes: ['id', 'name', 'attack']
+        });
+        let respuesta = api.data.results
+        let info = [];
+        for (let i = 0; i < respuesta.length; i++) {
+            const apiRes = await axios.get(`${respuesta[i].url}`)
+            let object = {
+                id: respuesta[i].url.split('/')[6],
+                img: apiRes.data.sprites.other.dream_world.front_default,
+                name: apiRes.data.name,
+                type: apiRes.data.types.map(x => x.type.name),
+                attack: apiRes.data.stats[1].base_stat,
+            }
+            info.push(object)
+        }
+        const hola = info.concat(mine)
+        hola.sort((a, b) => (a.attack > b.attack) ? 1 : ((b.attack > a.attack) ? -1 : 0))
+        res.send(hola)
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.OrderDescAttack = async (req, res, next) => {
+    try {
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=4')
+        const mine = await Pokemon.findAll({
+            order: [
+                ['attack', 'DESC'],
+            ],
+            attributes: ['id', 'name', 'attack']
+        });
+        let respuesta = api.data.results
+        let info = [];
+        for (let i = 0; i < respuesta.length; i++) {
+            const apiRes = await axios.get(`${respuesta[i].url}`)
+            let object = {
+                id: respuesta[i].url.split('/')[6],
+                img: apiRes.data.sprites.other.dream_world.front_default,
+                name: apiRes.data.name,
+                type: apiRes.data.types.map(x => x.type.name),
+                attack: apiRes.data.stats[1].base_stat,
+            }
+            info.push(object)
+        }
+        const hola = info.concat(mine)
+        hola.sort((a, b) => (a.attack < b.attack) ? 1 : ((b.attack < a.attack) ? -1 : 0))
+
+        res.send(hola)
+
+    } catch (error) {
+        next(error);
+    }
+};
+
+// exports.OrderDescAttack = async (req, res, next) => {
+//     try {
+//         const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=4')
+//         const mine = await Pokemon.findAll({
+//             order: [
+//                 ['attack', 'DESC'],
+//             ],
+//             attributes: ['id', 'name', 'attack']
+//         });
+//         let respuesta = api.data.results
+//         let info = [];
+//         for (let i = 0; i < respuesta.length; i++) {
+//             const apiRes = await axios.get(`${respuesta[i].url}`)
+//             let object = {
+//                 id: respuesta[i].url.split('/')[6],
+//                 img: apiRes.data.sprites.other.dream_world.front_default,
+//                 name: apiRes.data.name,
+//                 type: apiRes.data.types.map(x => x.type.name),
+//                 attack: apiRes.data.stats[1].base_stat,
+//             }
+//             info.push(object)
+//         }
+//         const hola = info.concat(mine)
+//         hola.sort((a, b) => (a.attack < b.attack) ? 1 : ((b.attack < a.attack) ? -1 : 0))
+
+//         res.send(hola)
+
+//     } catch (error) {
+//         next(error);
+//     }
+// };
+
+
+
+// const { name, healthpoints, attack, defense, speed, height, weight, type } = req.body

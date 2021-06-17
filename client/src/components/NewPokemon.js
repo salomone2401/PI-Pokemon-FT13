@@ -29,7 +29,6 @@ const NewPokemon = ({ history }) => {
 
 
   const [type, setType] = useState([])
-  const [image, setImage] = useState('')
 
   const { name, healthpoints, attack, defense, speed, height, weight } = pokemon;
 
@@ -46,12 +45,7 @@ const NewPokemon = ({ history }) => {
     ])
   }
 
-  const handleImage= e => {
-    setImage([
-      ...image,
-      [e.target.name] = e.target.value
-    ])
-  }
+
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -118,15 +112,7 @@ const NewPokemon = ({ history }) => {
           name='weight'
           value={weight}
         />
-        <input
-          type="url"
-          name="url"
-          placeholder="https://example.com"
-          pattern="https://.*"
-          size="30"
-          required
-          onChange={handleImage}
-        />
+      
         <p>choose a type</p>
         {error ? <p>hay un error</p> : null}
         {
