@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { orderNameAsc } from '../../actions/pokemonsAction';
-
+import React from 'react';
+import { useDispatch} from 'react-redux';
+import {getOwnPokemons} from '../../actions/pokemonsAction';
 
 
 import styled from 'styled-components';
-
 const Button = styled.button`
 background-color: #00C9A7;
 margin-top: 1rem;
@@ -17,27 +15,29 @@ color: black;
 border: 1px solid black;
 text-decoration: none;
 `; 
+const FilterByOwn = () => {
 
-const OrderByNameAsc = () => {
     const dispatch = useDispatch();
 
-    const handleSubmit = e => {
+      const handleSubmit = e => {
         e.preventDefault();
-        dispatch(orderNameAsc())
-    }
+        dispatch(getOwnPokemons())
+      }
+
     return (
         <>
             <form
-                onSubmit={handleSubmit}>
-                < Button
+            onSubmit={handleSubmit}>
+                <Button
                     type='submit'
                 >
-                    Name &uarr;
-            </ Button>
+                   Pokemons created by users
+            </Button>
+
             </form>
 
         </>
     );
 }
 
-export default OrderByNameAsc;
+export default FilterByOwn;

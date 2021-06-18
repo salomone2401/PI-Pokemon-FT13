@@ -13,17 +13,34 @@ const Container = styled.div`
         grid-template-columns: repeat(3, 1fr);
     }
 `;
+const Box = styled.div`
 
+`;
 const Card = styled.div`
       box-shadow: 2px 2px 10px #666;
     padding: 1rem;
-    background-color: #83c39b;
-
+    background-color: #4B4453;
+    border-radius: 10px;
 `;
+
 const Image = styled.img`
        width: 250px;
     height: 170px;
 `;
+const Text= styled.p`
+display: block;
+      color: white;
+      font-size: 1.5rem;
+      text-align: center;
+      margin: 1rem;
+`;
+const   Span= styled.span`
+text-transform: uppercase;
+font-weight: 700;
+text-decoration: none;
+`;
+
+
 
 
 const Pokemon = ({ pokemon }) => {
@@ -33,12 +50,14 @@ const Pokemon = ({ pokemon }) => {
         <Container>
         <Link to={`/pokemon/${id}`}>
             <Card>
-                <span>{id}</span>
-                <span>{name}</span>
-                <span>{type}</span>
+                <Box>
+                <Text># {id}</Text>
+                <Text>< Span>{name}</ Span></Text>
+                </Box>
                 {img ? <Image src={img} alt="pokemon character" /> 
                 :  <Image src={`${myImage}`} alt="pokemon" />
                     }
+                    <Text>{type}</Text>
             </Card>
         </Link>
         </Container>

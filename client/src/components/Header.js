@@ -6,12 +6,11 @@ import myImage from '../img/e.png';
 const Head = styled.div`
     display: flex;
     justify-content: space-between;
-    background-color: #95E06C;
-    padding-bottom: 3rem;
+    padding-bottom: 1rem;
 
 `;
 const Text= styled.p`
-margin: 2rem 5rem;
+margin: 2rem;
     text-align: center;
     padding: 1rem 1rem;
     font-size: 2rem;

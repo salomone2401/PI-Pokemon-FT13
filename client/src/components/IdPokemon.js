@@ -3,37 +3,110 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPokemonDetail } from '../actions/pokemonsAction';
 import { useParams } from "react-router-dom";
 import styled from 'styled-components';
-import Header from './Header';
+import { createGlobalStyle } from 'styled-components'
 
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background:#FFC75F ;
+  }
+`;
 const Container = styled.div`
-display: grid;
-grid-template-columns: 30% 70%;
-text-align: center;
+background-color:#B39CD0;
+width: 50%;
+position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+`;
+
+
+const Image = styled.div`
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: 2rem;
+   :hover{
+	-webkit-transform: scale(0.9);
+	transform: scale(0.9);
+}
+`;
+
+
+
+const Button = styled.a`
+margin-top: 1rem;
+padding: 1rem 2rem;
+border-radius: 7px;
+font-size: 1.5rem;
+font-weight: 700;
+background-color: #00C9A7;
+color: black;
+border: 1px solid black;
+text-decoration: none;
+position: absolute;
+    left: 1%;
+    top: 0;
+
+`;
+
+const Tipo = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+`;
+const Type = styled.p`
+margin: 2rem 2rem;
+background-color: #00C9A7;
+padding: 1rem 2rem;
+border-radius: 7px;
+font-size: 1.5rem;
+text-transform: uppercase;
+font-weight: 700;
+border: 1px solid black;
+
+:hover{
+	-webkit-transform: scale(0.9);
+	transform: scale(0.9);
+}
+`;
+
+
+const Span = styled.span`
+color: black;
+display: block;
+background-color: #B39CD0;
+padding: 1rem 2rem;
+border-radius: 7px;
+font-size: 1.5rem;
+text-transform: uppercase;
+font-weight: 700;
+margin-top: 1rem;
+border: 1px solid black;
 `;
 
 const Text = styled.p`
-    color: orange;
-    font-size: 4rem;
-    margin-left: 1rem;
-`;
-const Image = styled.div`
-    text-align: center;
-`;
-
-const Body = styled.div`
-    width: 100%;
-    background-color: #F4B2A3;
-    margin-bottom: 0;
+text-align: center;
+padding: 1rem 1rem;
+border-radius: 7px;
+font-size: 1.5rem;
 
 `;
 
-const Button = styled.a`
-font-size: 1rem;
-text-decoration: none;
-color: black;
-background-color: yellowgreen;
-padding: 1rem;
+
+const Box = styled.div`
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+margin: 0;
+background-color: #845EC2;
+border-radius: 15px;
+border: 1px solid black;
 `;
+
+
 
 const IdPokemon = () => {
 
@@ -48,32 +121,51 @@ const IdPokemon = () => {
   }, [dispatch, id])
 
   if (pokemonDetail === null || pokemonDetail === undefined) {
-    return ( <h1>That pokemondoesnt exist</h1>)
+    return (<h1>That pokemondoesnt exist</h1>)
   } else {
+console.log(pokemonDetail.type)
+    var input = pokemonDetail.type
+    var fields = input.split(',');
+
+    var name = fields[0];
+    var street = fields[1];
 
     return (
-      <>
-      <Header/>
-      <Body>
+  
 
-        <Image>
-          <span>#{pokemonDetail.id}</span>
-          <img src={pokemonDetail.img} alt="pokemon character" />
-        </Image>
+      <>
+    <GlobalStyle />
+        <Button href="/pokemon">&laquo; BACK TO MAIN PAGE</Button>
+
         <Container>
 
-          <p>{pokemonDetail.type.join(',')}</p>
-          <p><span>Name:</span>{pokemonDetail.name}</p>
-          <p><span>Health Points:</span>{pokemonDetail.HP}</p>
-          <p><span>Attack:</span>{pokemonDetail.attack}</p>
-          <p><span>Defense:</span>{pokemonDetail.defense}</p>
-          <p><span>Height:</span>{pokemonDetail.height}</p>
-          <p><span>Weight:</span>{pokemonDetail.weight}</p>
-        </Container>
-      </Body>
-      <Button href="/pokemon">&laquo; BACK TO MAIN PAGE</Button>
+          <Image>
+            <img src={pokemonDetail.img} alt="pokemon character" />
+          </Image>
 
-      </>)
+          <Tipo>
+            <Type>{name}</Type>
+            <Type>{street}</Type>
+          </Tipo>
+          <Box>
+            <div>
+              <Text>Name<Span>{pokemonDetail.name}</Span></Text>
+              <Text>HP<Span>{pokemonDetail.HP}</Span></Text>
+            </div>
+
+            <div>
+              <Text>Attack<Span>{pokemonDetail.attack}</Span></Text>
+              <Text>Defense<Span>{pokemonDetail.defense}</Span></Text>
+            </div>
+
+            <div>
+              <Text>Height<Span>{pokemonDetail.height}</Span></Text>
+              <Text>Weight<Span>{pokemonDetail.weight}</Span></Text>
+            </div>
+          </Box>
+        </Container>
+      </>
+    )
   }
 }
 

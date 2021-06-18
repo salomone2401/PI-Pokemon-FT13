@@ -12,7 +12,10 @@ import {
     ORDER_NAME_ASC,
     ORDER_NAME_DESC,
     ORDER_ATTACK_ASC,
-    ORDER_ATTACK_DESC
+    ORDER_ATTACK_DESC,
+    FILT_API_POKEMON,
+    FILT_OWN_POKEMON,
+    FILT_BY_TYPE
 } from '../types';
 
 const initialState = {
@@ -60,12 +63,29 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 types: action.payload
             }
+            //SI EL TYPE ES UN STRING
+        // case GET_TYPES_POKEMONS:
+            // return {
+            //     ...state,
+            //     pokemons: state.pokemons.filter(pokemon =>
+            //         pokemon.type == action.payload)
+            // }
+            //SI EL TYPE ES UN ARRAY
+        // case GET_TYPES_POKEMONS:
+        //         return {
+        //             ...state,
+        //             pokemons: state.pokemons.filter(item => 
+        //                  item.type.indexOf(action.payload) >= 0
+        //             )
+        //         }
+        //SI EL TYPE ES UN ARRAY
         case GET_TYPES_POKEMONS:
-            return {
-                ...state,
-                pokemons: state.pokemons.filter(pokemon =>
-                    pokemon.type == action.payload)
-            }
+                return {
+                    ...state,
+                    pokemons: action.payload.filter(item => 
+                            item.type.indexOf(action.type) >= 0
+                    )
+                }
         case CREATE_POKEMON:
             return {
                 ...state,
@@ -83,31 +103,53 @@ function rootReducer(state = initialState, action) {
                 loading: false,
                 error: action.payload
             }
-        case ORDER_NAME_ASC:{
-            return{
+        case ORDER_NAME_ASC: {
+            return {
                 ...state,
-                pokemons: action.payload.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+                pokemons: action.payload.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
             }
         }
-        case ORDER_NAME_DESC:{
-            return{
+        case ORDER_NAME_DESC: {
+            return {
                 ...state,
-                pokemons: action.payload.sort((a,b) => (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0))
+                pokemons: action.payload.sort((a, b) => (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0))
             }
         }
-        case ORDER_ATTACK_ASC:{
-            return{
-                ...state,
-                pokemons: action.payload
-            }
-        }
-        case ORDER_ATTACK_DESC:{
-            return{
+        case ORDER_ATTACK_ASC: {
+            return {
                 ...state,
                 pokemons: action.payload
             }
         }
-
+        case ORDER_ATTACK_DESC: {
+            return {
+                ...state,
+                pokemons: action.payload
+            }
+        }
+        case FILT_API_POKEMON: {
+            return {
+                ...state,
+                pokemons: action.payload
+            }
+        }
+        case FILT_OWN_POKEMON: {
+            return {
+                ...state,
+                pokemons: action.payload
+            }
+        }
+        // case FILT_BY_TYPE: {
+        //     return {
+        //         ...state,
+        //        pokemons: action.payload.filter(function (el) {
+        //             for (let i = 0; i < action.payload.length; i++) {
+        //                 return el.type[i].includes(action.type)
+        //             }
+        //         })
+        //     }
+            
+        // }
         default:
             return state;
     }

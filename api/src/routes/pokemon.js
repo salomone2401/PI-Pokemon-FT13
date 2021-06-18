@@ -1,28 +1,54 @@
-const { Router} = require('express');
-const { getAllPokemons, addNewPokemon,getPokemonById, OrderAscAttack, OrderDescAttack} = require('../controllers/pokemonController');
+const { Router } = require('express');
+const { getAllPokemons,
+    addNewPokemon,
+    getPokemonById,
+    OrderAscAttack,
+    OrderDescAttack,
+    filtAPIPokemons,
+    filtOwnPokemons,
+    filtByType
+} = require('../controllers/pokemonController');
+
+
 const router = Router();
 
 
-router.get('/',
-
-getAllPokemons 
+router.get('/', 
+getAllPokemons
 );
 router.get('/orderAsc',
-OrderAscAttack
+    OrderAscAttack
 );
 router.get('/orderDesc',
-OrderDescAttack
+    OrderDescAttack
+);
+
+router.get('/filtAPI',
+    filtAPIPokemons
+);
+
+
+// router.get('/filtType',
+// filtByType
+// )
+router.get('/filtOwn',
+    filtOwnPokemons
 );
 
 
 router.post('/',
-addNewPokemon
+    addNewPokemon
 )
 
 router.get('/:id',
-getPokemonById
+    getPokemonById
 )
 router.get('/:name',
-getPokemonById
+    getPokemonById
 )
+
+
+
+
+ 
 module.exports = router;

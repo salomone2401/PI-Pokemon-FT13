@@ -1,38 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getType } from '../actions/typesAction';
-import { getPokemonByType } from '../actions/pokemonsAction';
+import { getType } from '../../actions/typesAction';
+import { filtByType } from '../../actions/pokemonsAction';
 
-import styled from 'styled-components';
 
-const Button = styled.button`
-background-color: #00C9A7;
-margin-top: 1rem;
-padding: 1rem 2rem;
-border-radius: 7px;
-font-size: 1.5rem;
-font-weight: 700;
-color: black;
-border: 1px solid black;
-text-decoration: none;
-`; 
-
-const Select = styled.select`
-  color: black;
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
-  border-radius: 7px;
-  border: 1px solid black;
-  -webkit-appearance: button;
-  appearance: button;
-  outline: none;
-  `; 
-const Types = () => {
-
-  const [type, setType] = useState('')
+const FilterByType = () => {
 
   const dispatch = useDispatch();
 
+  const [type, setType] = useState('')
 
   const types = useSelector(state => state.types);
 
@@ -42,23 +18,28 @@ const Types = () => {
       [e.target.name]: e.target.value
     })
   }
+  const hola = Object.values(type).toString()
+  console.log(hola)
 
-  
   useEffect(() => {
     dispatch(getType());
+   console.log(dispatch(filtByType(hola)))
   }, [dispatch])
+
+
+
 
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(getPokemonByType(Object.values(type).toString()))
+    dispatch(filtByType(hola))
 
   }
   return (
     <form
       onSubmit={handleSubmit}>
       <div>
-        <Select
+        <select
           name='type'
           onChange={handleChange}
         >
@@ -71,15 +52,15 @@ const Types = () => {
               >{type.name}</option>
             )) : null
           }
-        </Select>
-        <Button type='submit'>Filt</Button>
+        </select>
+        <button type='submit'>Filt</button>
       </div>
     </form>
 
   );
 }
 
-export default Types;
+export default FilterByType;
 
 
 

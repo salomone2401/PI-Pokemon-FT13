@@ -1,6 +1,5 @@
 import {
-   GET_TYPES,
-   SHOW_TYPES_POKEMONS
+   GET_TYPES
 }
 from '../types';
 
@@ -13,7 +12,8 @@ export function getType(){
         try{
             const res = await clientAxios.get('/type/');
             dispatch({
-                type:GET_TYPES, payload: res.data });
+                type:GET_TYPES, payload: res.data 
+            });
         }catch (error){
             console.log(error)
         }

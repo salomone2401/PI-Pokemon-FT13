@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { orderNameAsc } from '../../actions/pokemonsAction';
-
-
+import React from 'react';
+import { useDispatch} from 'react-redux';
+import {getAPIPokemons} from '../../actions/pokemonsAction';
 
 import styled from 'styled-components';
-
 const Button = styled.button`
 background-color: #00C9A7;
 margin-top: 1rem;
@@ -18,26 +15,29 @@ border: 1px solid black;
 text-decoration: none;
 `; 
 
-const OrderByNameAsc = () => {
+const FilterByAPI = () => {
+
     const dispatch = useDispatch();
 
-    const handleSubmit = e => {
+      const handleSubmit = e => {
         e.preventDefault();
-        dispatch(orderNameAsc())
-    }
+        dispatch(getAPIPokemons())
+      }
+
     return (
         <>
             <form
-                onSubmit={handleSubmit}>
-                < Button
+            onSubmit={handleSubmit}>
+                <Button
                     type='submit'
                 >
-                    Name &uarr;
-            </ Button>
+                    Original Pokemons
+            </Button>
+
             </form>
 
         </>
     );
 }
 
-export default OrderByNameAsc;
+export default FilterByAPI;

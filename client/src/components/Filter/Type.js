@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getType } from '../actions/typesAction';
-import { getPokemonByType } from '../actions/pokemonsAction';
+import { getType } from '../../actions/typesAction';
+import { getPokemonsAction } from '../../actions/pokemonsAction';
+import Pokemon from '../Pokemon';
 
 import styled from 'styled-components';
 
@@ -17,48 +18,39 @@ border: 1px solid black;
 text-decoration: none;
 `; 
 
-const Select = styled.select`
-  color: black;
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
-  border-radius: 7px;
-  border: 1px solid black;
-  -webkit-appearance: button;
-  appearance: button;
-  outline: none;
-  `; 
-const Types = () => {
-
-  const [type, setType] = useState('')
+const Type = () => {
 
   const dispatch = useDispatch();
 
+  const [type, setType] = useState('')
 
   const types = useSelector(state => state.types);
-
+  const pokemons = useSelector(state => state.pokemons);
   const handleChange = e => {
     setType({
       ...type,
       [e.target.name]: e.target.value
     })
   }
+  const hola = Object.values(type).toString()
+  console.log(hola)
 
-  
   useEffect(() => {
     dispatch(getType());
+    dispatch(getPokemonsAction());
+ 
   }, [dispatch])
+
 
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(getPokemonByType(Object.values(type).toString()))
-
   }
   return (
+      <>
     <form
       onSubmit={handleSubmit}>
-      <div>
-        <Select
+        <select
           name='type'
           onChange={handleChange}
         >
@@ -71,15 +63,36 @@ const Types = () => {
               >{type.name}</option>
             )) : null
           }
-        </Select>
+        </select>
         <Button type='submit'>Filt</Button>
-      </div>
     </form>
+<div>
 
+{
+    Array.isArray(pokemons) ? pokemons.filter(function (el) {
+    for (let i = 0; i < pokemons.length; i++) {
+        el.type[i].includes('poison')
+
+    }}) : <p >NO SE Q PASA</p>
+}
+
+{/* {
+    Array.isArray(prueba) ?
+    prueba.map(pokemon => (
+        <Pokemon
+          key={pokemon.id}
+          pokemon={pokemon}
+        /> 
+        
+      )) : <p >NO SE Q PASA</p>
+
+      } */}
+      </div>
+      </>
   );
 }
 
-export default Types;
+export default Type;
 
 
 
