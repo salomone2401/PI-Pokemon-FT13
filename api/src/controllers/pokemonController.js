@@ -2,6 +2,7 @@ const { Pokemon } = require('../db')
 const axios = require('axios')
 const { v4: uuidv4 } = require('uuid');
 const { Type } = require('../db')
+const { pokemon_type} = require('../db')
 
 
 exports.addNewPokemon = async (req, res, next) => {
@@ -21,9 +22,33 @@ exports.addNewPokemon = async (req, res, next) => {
 
 
 
+// exports.getAllPokemons = async (req, res, next) => {
+//     try {
+//         const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=3')
+//         const mine = await Pokemon.findAll({
+//             attributes: ['id', 'name']
+//         });
+//         let respuesta = api.data.results
+//         let info = [];
+//         for (let i = 0; i < respuesta.length; i++) {
+//             const apiRes = await axios.get(`${respuesta[i].url}`)
+//             let object = {
+//                 id: respuesta[i].url.split('/')[6],
+//                 img: apiRes.data.sprites.other.dream_world.front_default,
+//                 name: apiRes.data.name,
+//                 type: apiRes.data.types.map(e => e.type.name)
+//             }
+//             info.push(object)
+//         }
+//         res.send(info.concat(mine))
+//     } catch (error) {
+//         next(error);
+//     }
+// };
+
 exports.getAllPokemons = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=20')
         const mine = await Pokemon.findAll({
             attributes: ['id', 'name']
         });
@@ -35,7 +60,7 @@ exports.getAllPokemons = async (req, res, next) => {
                 id: respuesta[i].url.split('/')[6],
                 img: apiRes.data.sprites.other.dream_world.front_default,
                 name: apiRes.data.name,
-                type: apiRes.data.types.map(e => e.type.name).toString()
+                type: apiRes.data.types.map(e => e.type.name)
             }
             info.push(object)
         }
@@ -44,6 +69,7 @@ exports.getAllPokemons = async (req, res, next) => {
         next(error);
     }
 };
+
 
 exports.getPokemonById = (req, res, next) => {
     const api = axios.get(`https://pokeapi.co/api/v2/pokemon/${req.params.id}`)
@@ -71,7 +97,7 @@ exports.getPokemonById = (req, res, next) => {
 
 exports.OrderAscAttack = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=4')
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
         const mine = await Pokemon.findAll({
             order: [
                 ['attack', 'DESC'],
@@ -193,3 +219,14 @@ exports.filtOwnPokemons = async (req, res, next) => {
 //         next(error);
 //     }
 // };
+
+// exports.buscar = async (req, res, next) => {
+ 
+//     const result = await Type.findAll({
+//           attributes: ['id', 'name'],   
+//           include: [ { model: pokemon_type, as: 'pokemon_type' } ]
+//       })
+//       console.log(result)
+    
+//       }
+   

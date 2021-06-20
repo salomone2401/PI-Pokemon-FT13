@@ -4,7 +4,7 @@ import {
     GET_POKEMONS_ERROR,
     GET_POKEMON_DETAIL,
     GET_POKEMON_NAME,
-    GET_TYPES_POKEMONS,
+
     CREATE_POKEMON,
     CREATE_POKEMON_SUCCESS,
     CREATE_POKEMON_ERROR,
@@ -14,7 +14,8 @@ import {
     ORDER_ATTACK_DESC,
     FILT_API_POKEMON,
     FILT_OWN_POKEMON,
-    FILT_BY_TYPE
+    FILT_BY_TYPE,
+    GET_TYPES_POKEMONS,
 
 } from '../types';
 
@@ -81,24 +82,6 @@ export function getPokemonName(name) {
 }
 
 
-
-export function getPokemonByType(tipo) {
-    return async (dispatch) => {
-        console.log('IMPRIMIENDO ACTION', tipo)
-      
-        try {
-            const res = await clientAxios.get('/pokemon/');
-            (dispatch({
-                type: GET_TYPES_POKEMONS,
-                payload: res.data,
-                tipos: tipo
-
-            }))
-        } catch (error) {
-            console.log(error)
-        }
-    }
-}
 
 
 
@@ -226,6 +209,21 @@ export function getOwnPokemons() {
         }
     }
 }
+export function getPokemonByType(tipo) {
+    return async (dispatch) => {
+        console.log('IMPRIMIENDO ACTION', tipo)
+      
+        try {
+            
+            dispatch({
+                type: GET_TYPES_POKEMONS,
+                payload: tipo
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
 
 // export function filtByType(type) {
 //     return async (dispatch) => {
@@ -245,20 +243,18 @@ export function getOwnPokemons() {
 // })
 
 
-export function filtByType(pokemons, type) {
-    return async (dispatch) => {
+// export function filtByType(type) {
+//     return async (dispatch) => {
 
-        try {
-            const res = await clientAxios.get('/pokemon', { type });
-            console.log('imprimeindo desde el action',
-                dispatch({
-                    type: FILT_BY_TYPE,
-                    payload: res.data,
-                    type: type
-                })
-            )
-        } catch (error) {
-            console.log(error)
-        }
-    }
-}
+//         try {
+//             dispatch({
+//             type: FILT_BY_TYPE,
+//                     payload: res.data,
+//                     type: type
+//                 })
+//             )
+//         } catch (error) {
+//             console.log(error)
+//         }
+//     }
+// }

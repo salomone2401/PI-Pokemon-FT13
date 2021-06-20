@@ -46,13 +46,13 @@ const Types = () => {
   
   useEffect(() => {
     dispatch(getType());
+    dispatch(getPokemonByType(Object.values(type).toString()))
   }, [dispatch])
 
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(getPokemonByType(Object.values(type).toString()))
-
+    console.log(dispatch(getPokemonByType(Object.values(type).toString())))
   }
   return (
     <form
@@ -80,6 +80,3 @@ const Types = () => {
 }
 
 export default Types;
-
-
-

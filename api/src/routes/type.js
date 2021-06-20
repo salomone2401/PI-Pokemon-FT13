@@ -1,5 +1,5 @@
 const { Router} = require('express');
-const {getAllTypes} = require('../controllers/typeController');
+const {getAllTypes, saveTypes, buscar} = require('../controllers/typeController');
 const router = Router();
 
 // GET /types:
@@ -9,7 +9,11 @@ const router = Router();
 
 router.get('/',
 getAllTypes
+);
 
+
+router.get('/tipo',
+buscar
 );
 
 module.exports = router;

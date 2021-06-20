@@ -63,14 +63,14 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 types: action.payload
             }
-            //SI EL TYPE ES UN STRING
+        //SI EL TYPE ES UN STRING
         // case GET_TYPES_POKEMONS:
-            // return {
-            //     ...state,
-            //     pokemons: state.pokemons.filter(pokemon =>
-            //         pokemon.type == action.payload)
-            // }
-            //SI EL TYPE ES UN ARRAY
+        // return {
+        //     ...state,
+        //     pokemons: state.pokemons.filter(pokemon =>
+        //         pokemon.type == action.payload)
+        // }
+        //SI EL TYPE ES UN ARRAY
         // case GET_TYPES_POKEMONS:
         //         return {
         //             ...state,
@@ -78,14 +78,20 @@ function rootReducer(state = initialState, action) {
         //                  item.type.indexOf(action.payload) >= 0
         //             )
         //         }
-        //SI EL TYPE ES UN ARRAY
         case GET_TYPES_POKEMONS:
-                return {
-                    ...state,
-                    pokemons: action.payload.filter(item => 
-                            item.type.indexOf(action.type) >= 0
-                    )
-                }
+            return {
+                ...state,
+                pokemons: state.pokemons.filter(function (el) {
+                    if (el.type.length === 1) {
+                        return el.type[0].includes(action.payload)
+                    } else if (el.type.length === 2) {
+                        return el.type[0].includes(action.payload) || el.type[1].includes(action.payload)
+                    } else {
+                        return null
+                    }
+                })
+            }
+        //SI EL TYPE ES UN ARRAY
         case CREATE_POKEMON:
             return {
                 ...state,
@@ -133,12 +139,12 @@ function rootReducer(state = initialState, action) {
                 pokemons: action.payload
             }
         }
-        case FILT_OWN_POKEMON: {
-            return {
-                ...state,
-                pokemons: action.payload
-            }
-        }
+        // case FILT_OWN_POKEMON: {
+        //     return {
+        //         ...state,
+        //         pokemons: action.payload
+        //     }
+        // }
         // case FILT_BY_TYPE: {
         //     return {
         //         ...state,
@@ -148,7 +154,7 @@ function rootReducer(state = initialState, action) {
         //             }
         //         })
         //     }
-            
+
         // }
         default:
             return state;

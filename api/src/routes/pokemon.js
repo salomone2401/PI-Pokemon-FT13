@@ -1,12 +1,14 @@
 const { Router } = require('express');
-const { getAllPokemons,
+const { 
+    getAllPokemons,
     addNewPokemon,
     getPokemonById,
     OrderAscAttack,
     OrderDescAttack,
     filtAPIPokemons,
     filtOwnPokemons,
-    filtByType
+    filtByType,
+    buscar
 } = require('../controllers/pokemonController');
 
 
@@ -16,6 +18,13 @@ const router = Router();
 router.get('/', 
 getAllPokemons
 );
+
+// router.get('/lpm',
+// buscar
+// )
+
+
+
 router.get('/orderAsc',
     OrderAscAttack
 );
@@ -46,8 +55,6 @@ router.get('/:id',
 router.get('/:name',
     getPokemonById
 )
-
-
 
 
  

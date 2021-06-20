@@ -1,6 +1,7 @@
 const axios = require('axios')
 const { Type } = require('../db')
 const { v4: uuidv4 } = require('uuid');
+const {Pokemon} = require('../db');
 
 exports.saveTypes = async (req, res, next) => {
     try {
@@ -26,3 +27,15 @@ exports.getAllTypes = async (req, res, next) => {
     res.json(categories);
   })
 };
+
+
+exports.buscar = async (req, res, next) => {
+ 
+  const result = await Type.findAll({
+        attributes: ['id', 'name'],   
+        include: Pokemon,
+    })
+    console.log(result)
+  
+    }
+

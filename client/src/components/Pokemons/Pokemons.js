@@ -4,7 +4,7 @@ import NamePokemon from './NamePokemon';
 import Header from '../Header';
 import Pokemon from './Pokemon';
 import Pagination from '../Pagination';
-import {getPokemonsAction } from '../../actions/pokemonsAction';
+import { getPokemonsAction } from '../../actions/pokemonsAction';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +21,7 @@ import Types from './Types';
 
 import { createGlobalStyle } from 'styled-components'
 
+import Loading from '../Loading';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -34,45 +35,45 @@ const Container = styled.div`
     grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
     margin: 2rem;
-@media (min-width: 768px) {
+    @media (min-width: 768px) {
         grid-template-columns: repeat(4, 1fr);
-    margin: 4rem;
-}
+        margin: 4rem;
+    }
 `;
+
 const Box = styled.div`
    display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
-@media (min-width: 768px) {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  grid-auto-rows: 75px;
-  grid-gap: 10px;
-  margin: 1.5rem;
-  
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    grid-auto-rows: 75px;
+    grid-gap: 10px;
+    margin: 1.5rem; 
 }
 `;
 const Fieldset = styled.fieldset`
-   display: flex;
-   justify-content: space-around;
-   background-color: #4B4453;
-   border: 1px solid black;
-   margin-top: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: #4B4453;
+    border: 1px solid black;
+    margin-top: 0;
 `;
 
 const Legend = styled.legend`
-margin-top: 0;
-color: black;
-font-size: 1.5rem;
-text-align: center;
-padding: 1px;
-background-color: #DDD4E6;
-border-radius: 3px;
+    margin-top: 0;
+    color: black;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1px;
+    background-color: #DDD4E6;
+    border-radius: 5px;
 `;
 
 
-const Text= styled.p`
-   margin: 1rem 1rem;
+const Text = styled.p`
+    margin: 1rem 1rem;
     text-align: center;
     padding: 1rem 1rem;
     font-size: 1.3rem;
@@ -82,9 +83,8 @@ const Text= styled.p`
     color:#000000;
     background-color: #FAE31D;
     position: absolute;
-   right: 1%;
+    right: 1%;
     top: 0;
-
 `;
 
 const Pokemons = () => {
@@ -107,39 +107,40 @@ const Pokemons = () => {
   //const currentPokemon = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
+  
   return (
-    <> 
+    <>
       <GlobalStyle />
       <Header />
       <Box>
-      <Fieldset>
-        <Legend>Order by...</Legend>
-        <OrderByNameAsc />
-        <OrderByNameDesc />
-        <OrderByAttackAsc />
-        <OrderByAttackDesc />
-  
-      </Fieldset>
-    
-      <Fieldset>
-        <Legend>Filter by...</Legend>
-        <FilterByAPI/>
-        <FilterByOwn />
-        <Types />
-      </Fieldset>
+        <Fieldset>
+          <Legend>Order by...</Legend>
+          <OrderByNameAsc />
+          <OrderByNameDesc />
+          <OrderByAttackAsc />
+          <OrderByAttackDesc />
+
+        </Fieldset>
+
+        <Fieldset>
+          <Legend>Filter by...</Legend>
+          <FilterByAPI />
+          <FilterByOwn />
+          <Types />
+        </Fieldset>
       </Box>
 
       <Link to={'/new'}>
-            <Text>New Pokemon</Text>
+        <Text>New Pokemon</Text>
       </Link>
       <NamePokemon />
 
 
-      
+
 
       { error ? <p>There was a mistake</p> : null}
-
-      {/* { loading ? <p >Loading...</p> : null} */}
+   
+    
       <Container>
         {
           Array.isArray(pokemons) ?
@@ -148,13 +149,16 @@ const Pokemons = () => {
                 key={pokemon.id}
                 pokemon={pokemon}
               />
-            )) : <p >There is no pokemonss</p>
+            
+            )) : <p>loading</p>
+            // <Loading />
         }
+          <Pagination
+              pokemonsPerPage={pokemonsPerPage}
+              paginate={paginate}
+              />
       </Container>
-      <Pagination
-        pokemonsPerPage={pokemonsPerPage}
-        paginate={paginate}
-      />
+     
 
     </>
   )
