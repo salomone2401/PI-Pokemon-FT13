@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemonName } from '../actions/pokemonsAction';
+import { getPokemonName } from '../../actions/pokemonsAction';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
@@ -9,19 +9,28 @@ const Bar = styled.input`
    padding: 1rem 1rem;
    border: 1px solid #000000;
     border-radius:5px;
+    font-size: 1.3rem;
+    background-color: #DDD4E6;
+    :hover{
+      background-color: white;
+    }
 `;
 
 const Button = styled.button`  
-   background-color: #C3F73A;
+   background-color: #FAE31D;
    border: 1px solid #000000;
-    border-radius:2px;
+   border-radius:5px;
+    font-size: 1.3rem;
     padding: 1rem 1rem;
   
 `;
 
 const Container = styled.div`  
-    margin: 2rem;
+    padding: 1rem 1rem;
     text-align: center;
+    position: absolute;
+    left: 1%;
+    top: 0;
 
 
 `;

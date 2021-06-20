@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemonDetail } from '../actions/pokemonsAction';
-import { useParams } from "react-router-dom";
+import { getPokemonDetail } from '../../actions/pokemonsAction';
+import { Link, useParams } from "react-router-dom";
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components'
+import Header from '../Header';
 
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background:#FFC75F ;
+    background: white
   }
 `;
 const Container = styled.div`
@@ -37,7 +38,7 @@ const Image = styled.div`
 
 
 
-const Button = styled.a`
+const Button = styled.button`
 margin-top: 1rem;
 padding: 1rem 2rem;
 border-radius: 7px;
@@ -123,7 +124,7 @@ const IdPokemon = () => {
   if (pokemonDetail === null || pokemonDetail === undefined) {
     return (<h1>That pokemondoesnt exist</h1>)
   } else {
-console.log(pokemonDetail.type)
+    console.log(pokemonDetail.type)
     var input = pokemonDetail.type
     var fields = input.split(',');
 
@@ -131,12 +132,14 @@ console.log(pokemonDetail.type)
     var street = fields[1];
 
     return (
-  
+
 
       <>
-    <GlobalStyle />
-        <Button href="/pokemon">&laquo; BACK TO MAIN PAGE</Button>
-
+        <GlobalStyle />
+        <Header />
+        <Link to={'/pokemon'}>
+          <Button>&laquo; BACK TO MAIN PAGE</Button>
+        </Link>
         <Container>
 
           <Image>

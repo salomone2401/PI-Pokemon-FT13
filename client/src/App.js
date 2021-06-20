@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './components/landingPage';
-import IdPokemon from './components/IdPokemon';
-import NamePokemon from './components/NamePokemon';
-import Types from './components/Types';
-import Pokemons from './components/Pokemons';
+import IdPokemon from './components/Pokemons/IdPokemon';
+import NamePokemon from './components/Pokemons/NamePokemon';
+import Types from './components/Pokemons/Types';
+import Pokemons from './components/Pokemons/Pokemons';
 
 import { Provider } from 'react-redux';
 import store from './store';
-import NewPokemon from './components/NewPokemon';
+import NewPokemon from './components/Pokemons/NewPokemon';
 
 
 function App() {

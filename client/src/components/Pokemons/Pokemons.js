@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NamePokemon from './NamePokemon';
-import Header from './Header';
+import Header from '../Header';
 import Pokemon from './Pokemon';
-import Pagination from './Pagination';
-import {getPokemonsAction } from '../actions/pokemonsAction';
+import Pagination from '../Pagination';
+import {getPokemonsAction } from '../../actions/pokemonsAction';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import OrderByNameAsc from './Order/OrderByNameAsc';
-import OrderByNameDesc from './Order/OrderByNameDesc';
+import OrderByNameAsc from '../Order/OrderByNameAsc';
+import OrderByNameDesc from '../Order/OrderByNameDesc';
 
-import OrderByAttackAsc from './Order/OrderByAttackAsc';
-import OrderByAttackDesc from './Order/OrderByAttackDesc';
+import OrderByAttackAsc from '../Order/OrderByAttackAsc';
+import OrderByAttackDesc from '../Order/OrderByAttackDesc';
 
-import FilterByOwn from './Filter/FilterByOwn';
-import FilterByAPI from './Filter/FilterByAPI';
+import FilterByOwn from '../Filter/FilterByOwn';
+import FilterByAPI from '../Filter/FilterByAPI';
 
 import Types from './Types';
 
@@ -42,26 +42,50 @@ const Container = styled.div`
 const Box = styled.div`
    display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: 2rem;
-    margin: 2rem;
+    gap: 1.5rem;
 @media (min-width: 768px) {
-        grid-template-columns: 45% 55%;
-        gap: 2rem;
-    margin: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  grid-auto-rows: 75px;
+  grid-gap: 10px;
+  margin: 1.5rem;
+  
 }
 `;
 const Fieldset = styled.fieldset`
    display: flex;
    justify-content: space-around;
    background-color: #4B4453;
-margin: 0;
-border: 1px solid black;
+   border: 1px solid black;
+   margin-top: 0;
 `;
 
 const Legend = styled.legend`
-color: white;
+margin-top: 0;
+color: black;
+font-size: 1.5rem;
+text-align: center;
+padding: 1px;
+background-color: #DDD4E6;
+border-radius: 3px;
 `;
 
+
+const Text= styled.p`
+   margin: 1rem 1rem;
+    text-align: center;
+    padding: 1rem 1rem;
+    font-size: 1.3rem;
+    border: 1px solid #000000;
+    border-radius:5px;
+    box-sizing: border-box;
+    color:#000000;
+    background-color: #FAE31D;
+    position: absolute;
+   right: 1%;
+    top: 0;
+
+`;
 
 const Pokemons = () => {
 
@@ -105,7 +129,9 @@ const Pokemons = () => {
       </Fieldset>
       </Box>
 
-      <Link to={'/new'}>nuevo </Link>
+      <Link to={'/new'}>
+            <Text>New Pokemon</Text>
+      </Link>
       <NamePokemon />
 
 

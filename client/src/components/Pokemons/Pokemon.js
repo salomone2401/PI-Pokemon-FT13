@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import myImage from '../img/log.png';
+import myImage from '../../img/0.png';
 
 
 
@@ -33,6 +33,9 @@ display: block;
       font-size: 1.5rem;
       text-align: center;
       margin: 1rem;
+      text-decoration: underline;
+      text-decoration-color: #4B4453 ;
+      
 `;
 const   Span= styled.span`
 text-transform: uppercase;

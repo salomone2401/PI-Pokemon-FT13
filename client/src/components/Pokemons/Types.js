@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getType } from '../actions/typesAction';
-import { getPokemonByType } from '../actions/pokemonsAction';
+import { getType } from '../../actions/typesAction';
+import { getPokemonByType } from '../../actions/pokemonsAction';
 
 import styled from 'styled-components';
 
@@ -19,8 +19,8 @@ text-decoration: none;
 
 const Select = styled.select`
   color: black;
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
+  padding: 1rem 1rem;
+  font-size: 1.3rem;
   border-radius: 7px;
   border: 1px solid black;
   -webkit-appearance: button;

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createNewPokemon } from '../actions/pokemonsAction';
-import { getType } from '../actions/typesAction';
-import Header from './Header';
+import { createNewPokemon } from '../../actions/pokemonsAction';
+import { getType } from '../../actions/typesAction';
+import Header from '../Header';
+
+
+
+
 
 const NewPokemon = ({ history }) => {
 
