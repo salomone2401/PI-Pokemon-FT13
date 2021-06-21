@@ -19,9 +19,9 @@ router.get('/',
 getAllPokemons
 );
 
-// router.get('/lpm',
-// buscar
-// )
+router.get('/buscar',
+buscar
+)
 
 
 

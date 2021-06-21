@@ -4,7 +4,6 @@ import { getPokemonName } from '../../actions/pokemonsAction';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
-
 const Bar = styled.input`   
    padding: 1rem 1rem;
    border: 1px solid #000000;
@@ -31,8 +30,6 @@ const Container = styled.div`
     position: absolute;
     left: 1%;
     top: 0;
-
-
 `;
 
 

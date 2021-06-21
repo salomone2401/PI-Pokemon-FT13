@@ -1,8 +1,6 @@
-const { Pokemon } = require('../db')
+const { Pokemon, Type, PokemonType } = require('../db')
 const axios = require('axios')
 const { v4: uuidv4 } = require('uuid');
-const { Type } = require('../db')
-const { pokemon_type} = require('../db')
 
 
 exports.addNewPokemon = async (req, res, next) => {
@@ -22,36 +20,31 @@ exports.addNewPokemon = async (req, res, next) => {
 
 
 
-// exports.getAllPokemons = async (req, res, next) => {
-//     try {
-//         const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=3')
-//         const mine = await Pokemon.findAll({
-//             attributes: ['id', 'name']
-//         });
-//         let respuesta = api.data.results
-//         let info = [];
-//         for (let i = 0; i < respuesta.length; i++) {
-//             const apiRes = await axios.get(`${respuesta[i].url}`)
-//             let object = {
-//                 id: respuesta[i].url.split('/')[6],
-//                 img: apiRes.data.sprites.other.dream_world.front_default,
-//                 name: apiRes.data.name,
-//                 type: apiRes.data.types.map(e => e.type.name)
-//             }
-//             info.push(object)
-//         }
-//         res.send(info.concat(mine))
-//     } catch (error) {
-//         next(error);
-//     }
-// };
-
 exports.getAllPokemons = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=20')
-        const mine = await Pokemon.findAll({
-            attributes: ['id', 'name']
-        });
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=10')
+    
+        //DATABASE
+        const elem = await Pokemon.findAll()
+        const arg = await PokemonType.findAll()
+        for (let i = 0; i < elem.length; i++) {
+            elem[i] = { ...elem[i].dataValues, type: [] }
+        }
+        for (let i = 0; i < arg.length; i++) {
+            const pokeId = arg[i].dataValues.pokemonId;
+            const tipoId = arg[i].dataValues.typeId;
+    
+            const typeName = await Type.findAll({
+                where: {
+                    id: tipoId
+                }
+            })
+            for (let j = 0; j < elem.length; j++) {
+                if (pokeId.toString() === elem[j].id) {
+                    elem[j].type.push(typeName[0].dataValues.name)
+                }
+            }
+        }
         let respuesta = api.data.results
         let info = [];
         for (let i = 0; i < respuesta.length; i++) {
@@ -64,7 +57,8 @@ exports.getAllPokemons = async (req, res, next) => {
             }
             info.push(object)
         }
-        res.send(info.concat(mine))
+        let resultado = [...info, ...elem]
+        res.send(resultado)
     } catch (error) {
         next(error);
     }
@@ -221,12 +215,36 @@ exports.filtOwnPokemons = async (req, res, next) => {
 // };
 
 // exports.buscar = async (req, res, next) => {
- 
+
 //     const result = await Type.findAll({
 //           attributes: ['id', 'name'],   
 //           include: [ { model: pokemon_type, as: 'pokemon_type' } ]
 //       })
 //       console.log(result)
-    
+
 //       }
-   
+exports.buscar = async (req, res, next) => {
+
+    const elem = await Pokemon.findAll()
+    const arg = await PokemonType.findAll()
+    for (let i = 0; i < elem.length; i++) {
+        elem[i].dataValues = { ...elem[i].dataValues, type: [] }
+    }
+    for (let i = 0; i < arg.length; i++) {
+        const pokeId = arg[i].dataValues.pokemonId;
+        const tipoId = arg[i].dataValues.typeId;
+
+        const typeName = await Type.findAll({
+            where: {
+                id: tipoId
+            }
+        })
+        for (let j = 0; j < elem.length; j++) {
+            if (pokeId.toString() === elem[j].dataValues.id) {
+                elem[j].dataValues.type.push(typeName[0].dataValues.name)
+            }
+        }
+    }
+}
+
+

@@ -31,11 +31,4 @@ exports.getAllTypes = async (req, res, next) => {
 
 exports.buscar = async (req, res, next) => {
  
-  const result = await Type.findAll({
-        attributes: ['id', 'name'],   
-        include: Pokemon,
-    })
-    console.log(result)
-  
-    }
-
+      }

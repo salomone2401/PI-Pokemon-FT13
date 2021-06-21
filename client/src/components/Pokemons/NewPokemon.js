@@ -3,10 +3,107 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createNewPokemon } from '../../actions/pokemonsAction';
 import { getType } from '../../actions/typesAction';
 import Header from '../Header';
+import styled from 'styled-components';
+
+import myImage from '../../img/pika.png';
+
+import { createGlobalStyle } from 'styled-components'
 
 
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color:#D5CABD;
+  }
+`;
+const Image = styled.img`
+    width: 600px;
+    height: 600px;
+`;
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+`;
+const Diva = styled.div`
+margin: .5rem;
+font-size: 1.3rem;
+
+`;
+const Text = styled.h2`
+margin: 1rem 0;
+text-align: center;
+font-weight: 900;
+font-size: 2rem;
+`;
+const Par = styled.p`
+margin: 1rem 0;
+text-align: center;
+font-size: 1.6rem;
+`;
+
+const Graph = styled.p`
+font-size: 1.3rem;
+`;
+const Div = styled.div`
+width: 500px;
+margin: 1rem 2rem;
+  background-color: #FEFEDF;
+  border-radius: 20px;
+
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+`;
+const Tipo = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 1.5rem;
+    background-color: #C493FF;
+
+`;
+
+const Input = styled.input`
+    margin: .5rem;
+    font-size: 1.5rem;
+    padding: .5rem;
+    background-color: #C493FF;
+    border: 1px solid #845EC2;
+    ::placeholder { 
+  color: black;
+  opacity: 1; 
+}
+`;
+const CheckBox = styled.input`
+  list-style: none;
+  float: left;
+  margin-right: .5rem;
+ 
+`;
+const Box = styled.div`
+margin-left: 2.5rem;
+`;
+
+
+const Advertencia = styled.p`
+color: red;
+font-weight: 700;
+text-align: center;
+`;
+const Button = styled.button`
+background-color: #00C9A7;
+margin-top: 1rem;
+padding: 1rem 3rem;
+border-radius: 7px;
+font-size: 1.5rem;
+font-weight: 700;
+color: black;
+border: 1px solid black;
+text-decoration: none;
+position: absolute;
+top: 85%;
+right: 70%;
+`; 
 
 const NewPokemon = ({ history }) => {
 
@@ -43,107 +140,121 @@ const NewPokemon = ({ history }) => {
     })
   }
   const handleType = e => {
-    setType([
+      setType([
       ...type,
       [e.target.name] = e.target.value
     ])
   }
 
-
-
   const handleSubmit = e => {
     e.preventDefault();
-    
+
     dispatch(createNewPokemon(pokemon, type))
     history.push('/pokemon');
   }
 
   return (
-    <>
+    <Container>
+      <GlobalStyle />
 
-      <Header />
-      <h1>Create your own Pokemon</h1>
+      <Div>
+        <Text>
+          Create your Pokemon
+        </Text>
+        <form
+          onSubmit={handleSubmit}>
+          <Box>
+            <Input
+              type="text"
+              placeholder="Name"
+              onChange={handleChange}
+              name='name'
+              value={name}
+            />
 
-      <form
-        onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          onChange={handleChange}
-          name='name'
-          value={name}
-        />
-        <input
-          type="number"
-          placeholder="Health Points"
-          onChange={handleChange}
-          name='healthpoints'
-          value={healthpoints}
-        />
-        <input
-          type="number"
-          placeholder="Attack"
-          onChange={handleChange}
-          name='attack'
-          value={attack}
-        />
-        <input
-          type="number"
-          placeholder="Speed"
-          onChange={handleChange}
-          name='speed'
-          value={speed}
-        />
+            <Input
+              type="number"
+              placeholder="Health Points"
+              onChange={handleChange}
+              name='healthpoints'
+              value={healthpoints}
+            />
+            <Input
+              type="number"
+              placeholder="Attack"
+              onChange={handleChange}
+              name='attack'
+              value={attack}
+            />
+            <Input
+              type="number"
+              placeholder="Speed"
+              onChange={handleChange}
+              name='speed'
+              value={speed}
+            />
 
-        <input
-          type="number"
-          placeholder="Defense"
-          onChange={handleChange}
-          name='defense'
-          value={defense}
-        />
-        <input
-          type="number"
-          placeholder="Height"
-          onChange={handleChange}
-          name='height'
-          value={height}
-        />
-        <input
-          type="number"
-          placeholder="Weight"
-          onChange={handleChange}
-          name='weight'
-          value={weight}
-        />
-      
-        <p>choose a type</p>
-        {error ? <p>hay un error</p> : null}
-        {
+            <Input
+              type="number"
+              placeholder="Defense"
+              onChange={handleChange}
+              name='defense'
+              value={defense}
+            />
 
-          Array.isArray(types) ? types.map(type => (
-            <div>
-              <label>{type.name}</label>
-              <input
-                key={type.id}
-                type="radio"
-                value={type.name}
-                name='type'
-                onChange={handleType}
-              />
-            </div>
-          )) : null
-        }
+            <Input
+              type="number"
+              placeholder="Height"
+              onChange={handleChange}
+              name='height'
+              value={height}
+            />
 
-        <button
-          type='submit'
+            <Input
+              type="number"
+              placeholder="Weight"
+              onChange={handleChange}
+              name='weight'
+              value={weight}
+            />
+          </Box>
+          <Par>Choose a type</Par>
+         
+          {
+            type.length <2 ? <Advertencia>You can select only two</Advertencia>  : <p>erorrrr</p>
+          }
 
-        >Create</button>
-      </form>
+          <Tipo>
+            {
+
+              Array.isArray(types) ? types.map(type => (
+                <Diva>
+                  {type.name}
+                  <CheckBox
+                    key={type.id}
+                    type="checkbox"
+                    value={type.name}
+                    name='type'
+                    onChange={handleType}
+                  />
+                </Diva>
+              )) : null
+            }
+          </Tipo>
+
+
+          <Button
+            type='submit'
+
+          >Create</Button>
+  </form>
+      </Div>
+      <Image src={`${myImage}`} alt="Pokemon" />
       { loading ? <p>Cargando...</p> : null}
 
       { error ? <p>{error}</p> : null}
-    </>
+
+    </Container>
   );
 }
 

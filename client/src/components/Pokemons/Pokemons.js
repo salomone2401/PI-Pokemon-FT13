@@ -43,7 +43,7 @@ const Container = styled.div`
 
 const Box = styled.div`
    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   @media (min-width: 768px) {
     display: grid;
@@ -56,9 +56,11 @@ const Box = styled.div`
 const Fieldset = styled.fieldset`
     display: flex;
     justify-content: space-around;
+    
     background-color: #4B4453;
     border: 1px solid black;
     margin-top: 0;
+
 `;
 
 const Legend = styled.legend`
@@ -114,16 +116,13 @@ const Pokemons = () => {
       <Header />
       <Box>
         <Fieldset>
-          <Legend>Order by...</Legend>
           <OrderByNameAsc />
           <OrderByNameDesc />
           <OrderByAttackAsc />
           <OrderByAttackDesc />
 
         </Fieldset>
-
         <Fieldset>
-          <Legend>Filter by...</Legend>
           <FilterByAPI />
           <FilterByOwn />
           <Types />

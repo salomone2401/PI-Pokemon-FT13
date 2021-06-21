@@ -12,9 +12,7 @@ getAllTypes
 );
 
 
-router.get('/tipo',
-buscar
-);
+
 
 module.exports = router;
 
