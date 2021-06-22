@@ -16,8 +16,8 @@ import OrderByAttackDesc from '../Order/OrderByAttackDesc';
 
 import FilterByOwn from '../Filter/FilterByOwn';
 import FilterByAPI from '../Filter/FilterByAPI';
-
-import Types from './Types';
+import Types from '../Filter/Types';
+import ResetFilter from '../Filter/ResetFilter';
 
 import { createGlobalStyle } from 'styled-components'
 
@@ -47,7 +47,7 @@ const Box = styled.div`
     gap: 1.5rem;
   @media (min-width: 768px) {
     display: grid;
-    grid-template-columns: 1fr 1.3fr;
+    grid-template-columns: 1fr 1.7fr;
     grid-auto-rows: 75px;
     grid-gap: 10px;
     margin: 1.5rem; 
@@ -120,9 +120,11 @@ const Pokemons = () => {
 
         </Fieldset>
         <Fieldset>
+         
           <FilterByAPI />
           <FilterByOwn />
           <Types />
+          <ResetFilter />
         </Fieldset>
       </Box>
 

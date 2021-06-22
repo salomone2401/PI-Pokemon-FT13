@@ -15,7 +15,6 @@ import {
     ORDER_ATTACK_DESC,
     FILT_API_POKEMON,
     FILT_OWN_POKEMON,
-    FILT_BY_TYPE
 } from '../types';
 
 const initialState = {
@@ -31,21 +30,34 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
+        case CREATE_POKEMON:
         case GET_ALL_POKEMONS:
             return {
                 ...state,
                 loading: action.payload
             }
+        case FILT_OWN_POKEMON:
+        case FILT_API_POKEMON:
+        case ORDER_ATTACK_DESC:
+        case ORDER_ATTACK_ASC:
         case GET_POKEMONS_SUCCESS:
             return {
                 ...state,
                 pokemons: action.payload
             }
+        case CREATE_POKEMON_ERROR:
         case GET_POKEMONS_ERROR:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
+            }
+
+        case CREATE_POKEMON_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                pokemons: action.payload
             }
         case GET_POKEMON_DETAIL:
             return {
@@ -77,23 +89,7 @@ function rootReducer(state = initialState, action) {
                     }
                 })
             }
-        case CREATE_POKEMON:
-            return {
-                ...state,
-                loading: action.payload
-            }
-        case CREATE_POKEMON_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                pokemons: action.payload
-            }
-        case CREATE_POKEMON_ERROR:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            }
+
         case ORDER_NAME_ASC: {
             return {
                 ...state,
@@ -106,41 +102,6 @@ function rootReducer(state = initialState, action) {
                 pokemons: action.payload.sort((a, b) => (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0))
             }
         }
-        case ORDER_ATTACK_ASC: {
-            return {
-                ...state,
-                pokemons: action.payload
-            }
-        }
-        case ORDER_ATTACK_DESC: {
-            return {
-                ...state,
-                pokemons: action.payload
-            }
-        }
-        case FILT_API_POKEMON: {
-            return {
-                ...state,
-                pokemons: action.payload
-            }
-        }
-        case FILT_OWN_POKEMON: {
-            return {
-                ...state,
-                pokemons: action.payload
-            }
-        }
-        // case FILT_BY_TYPE: {
-        //     return {
-        //         ...state,
-        //        pokemons: action.payload.filter(function (el) {
-        //             for (let i = 0; i < action.payload.length; i++) {
-        //                 return el.type[i].includes(action.type)
-        //             }
-        //         })
-        //     }
-
-        // }
         default:
             return state;
     }

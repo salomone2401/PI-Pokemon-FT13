@@ -1,18 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import myImage from '../../img/0.png';
+import myImage from '../../img/pok.png';
 
 
-
-const Container = styled.div`
-   display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    @media (min-width: 768px) {
-        grid-template-columns: repeat(3, 1fr);
-    }
-`;
 const Box = styled.div`
 display: flex;
 justify-content: center;
@@ -27,9 +18,23 @@ const Card = styled.div`
 `;
 
 const Image = styled.img`
-    width: 250px;
-    height: 170px;
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 200px;
 `;
+const Image2 = styled.img`
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  width: 200px;
+  height: 100px;
+`;
+
+
 const Text = styled.p`
     display: block;
     color: white;
@@ -68,31 +73,18 @@ const Type2 = styled.p`
 const Pokemon = ({ pokemon }) => {
     const { name, type, id, img } = pokemon;
 
-console.log(type.length)
     return (
         <div>
             <Link to={`/pokemon/${id}`}>
                 <Card>
-
                     <Text># {id}</Text>
                     <Text>< Span>{name}</ Span></Text>
-
-                    {img ? <Image src={img} alt="pokemon character" />
-                        : <Image src={`${myImage}`} alt="pokemon" />
+                    {img ? <Image src={img} alt="pokemon character" /> :
+                        <Image2 src={myImage} alt="pokemon character" />
                     }
-                    {
-                        type.length == 2 ?
-                            <Box>
-                                <Type >{type[0]}</Type >
-                                <Type2 >{type[1]}</Type2 >
-                            </Box>
-                            :
-                            <Box>
-                                <Type >{type[0]}</Type >
-                            </Box>
-                    }
-
-
+                    <Box>
+                        <Type >{type}</Type >
+                    </Box>
                 </Card>
             </Link>
         </div>

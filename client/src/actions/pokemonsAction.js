@@ -1,11 +1,7 @@
 import {
-    GET_ALL_POKEMONS,
     GET_POKEMONS_SUCCESS,
-    GET_POKEMONS_ERROR,
     GET_POKEMON_DETAIL,
     GET_POKEMON_NAME,
-    GET_POKEMON_DETAILDB,
-
     CREATE_POKEMON,
     CREATE_POKEMON_SUCCESS,
     CREATE_POKEMON_ERROR,
@@ -15,7 +11,6 @@ import {
     ORDER_ATTACK_DESC,
     FILT_API_POKEMON,
     FILT_OWN_POKEMON,
-    FILT_BY_TYPE,
     GET_TYPES_POKEMONS,
 
 } from '../types';
@@ -23,34 +18,46 @@ import {
 import clientAxios from '../config/axios';
 
 
+// export function getPokemonsAction() {
+//     return async (dispatch) => {
+//         dispatch(downloadPokemons());
+//         try {
+//             const res = await clientAxios.get('/pokemon/');
+//             dispatch(downloadPokemonsSuccess(res.data));
+//         } catch (error) {
+//             console.log(error)
+//             dispatch(downloadPokemonsError());
+//         }
+//     }
+// }
+// const downloadPokemons = () => ({
+//     type: GET_ALL_POKEMONS,
+//     payload: true
+// });
+
+// const downloadPokemonsSuccess = pokemons => ({
+//     type: GET_POKEMONS_SUCCESS,
+//     payload: pokemons
+// });
+
+// const downloadPokemonsError = () => ({
+//     type: GET_POKEMONS_ERROR,
+//     payload: false
+// });
+
 export function getPokemonsAction() {
     return async (dispatch) => {
-        dispatch(downloadPokemons());
         try {
             const res = await clientAxios.get('/pokemon/');
-            dispatch(downloadPokemonsSuccess(res.data));
+            dispatch({
+                type: GET_POKEMONS_SUCCESS,
+                payload: res.data
+            });
         } catch (error) {
             console.log(error)
-            dispatch(downloadPokemonsError());
         }
     }
 }
-const downloadPokemons = () => ({
-    type: GET_ALL_POKEMONS,
-    payload: true
-});
-
-const downloadPokemonsSuccess = pokemons => ({
-    type: GET_POKEMONS_SUCCESS,
-    payload: pokemons
-});
-
-const downloadPokemonsError = () => ({
-    type: GET_POKEMONS_ERROR,
-    payload: false
-});
-
-
 
 
 export function getPokemonDetail(id) {
@@ -121,8 +128,6 @@ const addPokemonError = estado => ({
     type: CREATE_POKEMON_ERROR,
     payload: estado
 });
-
-
 
 
 export function orderNameAsc() {
@@ -215,10 +220,8 @@ export function getOwnPokemons() {
 }
 export function getPokemonByType(tipo) {
     return async (dispatch) => {
-        console.log('IMPRIMIENDO ACTION', tipo)
-      
         try {
-            
+
             dispatch({
                 type: GET_TYPES_POKEMONS,
                 payload: tipo
@@ -229,36 +232,3 @@ export function getPokemonByType(tipo) {
     }
 }
 
-// export function filtByType(type) {
-//     return async (dispatch) => {
-
-//         try {
-//             const res = await clientAxios.get('/pokemon/filtType', type);
-//             dispatch(filtPokemon(type))
-
-//         } catch (error) {
-//             console.log(error)
-//         }
-//     }
-// }
-// const filtPokemon = (type) =>({
-//     type: FILT_BY_TYPE,
-//     payload: type
-// })
-
-
-// export function filtByType(type) {
-//     return async (dispatch) => {
-
-//         try {
-//             dispatch({
-//             type: FILT_BY_TYPE,
-//                     payload: res.data,
-//                     type: type
-//                 })
-//             )
-//         } catch (error) {
-//             console.log(error)
-//         }
-//     }
-// }

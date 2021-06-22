@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import IdPokemon from './components/Pokemons/IdPokemon';
 import NamePokemon from './components/Pokemons/NamePokemon';
-import Types from './components/Pokemons/Types';
 import Pokemons from './components/Pokemons/Pokemons';
 
 import { Provider } from 'react-redux';
@@ -20,7 +19,6 @@ function App() {
           <Route exact path='/pokemon' component={Pokemons} />
           <Route exact path='/pokemon/:id' component={IdPokemon} />
           <Route exact path='/pokemon/:name' component={NamePokemon} />
-          <Route exact path='/type' component={Types} />
           <Route exact path='/new' component={NewPokemon} />
         </ Switch>
         </Provider>

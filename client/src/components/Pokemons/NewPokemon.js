@@ -125,13 +125,14 @@ const NewPokemon = ({ history }) => {
     defense: null,
     speed: null,
     height: null,
-    weight: null
+    weight: null,
+    img: ''
   })
 
 
   const [type, setType] = useState([])
 
-  const { name, healthpoints, attack, defense, speed, height, weight } = pokemon;
+  const { name, healthpoints, attack, defense, speed, height, weight, img } = pokemon;
 
   const handleChange = e => {
     setPokemon({
@@ -216,6 +217,13 @@ const NewPokemon = ({ history }) => {
               onChange={handleChange}
               name='weight'
               value={weight}
+            />
+               <Input
+              type="url"
+              placeholder="Image url"
+              onChange={handleChange}
+              name='img'
+              value={img}
             />
           </Box>
           <Par>Choose a type</Par>

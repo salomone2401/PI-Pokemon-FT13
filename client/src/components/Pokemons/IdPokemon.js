@@ -114,7 +114,7 @@ const IdPokemon = () => {
   const dispatch = useDispatch();
   const pokemonDetail = useSelector(state => state.pokemonDetail);
   const { id } = useParams()
-
+console.log('imprimiendo id',id)
 
 
   useEffect(() => {
@@ -126,7 +126,7 @@ const IdPokemon = () => {
   if (pokemonDetail === null || pokemonDetail === undefined) {
     return (<h1>That pokemondoesnt exist</h1>)
   } else {
-    console.log(pokemonDetail.type)
+    console.log(pokemonDetail)
     var input = pokemonDetail.type
     var fields = input.split(',');
 
