@@ -3,12 +3,11 @@ const {
     getAllPokemons,
     addNewPokemon,
     getPokemonById,
+    getPokemonByName,
     OrderAscAttack,
     OrderDescAttack,
     filtAPIPokemons,
     filtOwnPokemons,
-    filtByType,
-    buscar
 } = require('../controllers/pokemonController');
 
 
@@ -18,11 +17,6 @@ const router = Router();
 router.get('/', 
 getAllPokemons
 );
-
-router.get('/buscar/:id',
-buscar
-)
-
 
 
 router.get('/orderAsc',
@@ -36,10 +30,6 @@ router.get('/filtAPI',
     filtAPIPokemons
 );
 
-
-// router.get('/filtType',
-// filtByType
-// )
 router.get('/filtOwn',
     filtOwnPokemons
 );
@@ -50,12 +40,11 @@ router.post('/',
 )
 
 router.get('/:id',
- getPokemonById,
- 
+ getPokemonById
 )
-router.get('/:name',
-    getPokemonById
-)
+// router.get('/:name',
+// getPokemonByName
+// )
 
 
  
