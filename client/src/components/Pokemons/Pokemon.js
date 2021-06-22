@@ -72,7 +72,9 @@ const Type2 = styled.p`
 `;
 const Pokemon = ({ pokemon }) => {
     const { name, type, id, img } = pokemon;
-
+let hola = type[0]
+let chau = type[1]
+console.log(chau)
     return (
         <div>
             <Link to={`/pokemon/${id}`}>
@@ -82,9 +84,14 @@ const Pokemon = ({ pokemon }) => {
                     {img ? <Image src={img} alt="pokemon character" /> :
                         <Image2 src={myImage} alt="pokemon character" />
                     }
-                    <Box>
-                        <Type >{type}</Type >
-                    </Box>
+                   <Box>
+                    <Type >{type[0]}</Type >
+                    {
+                        type[1] ? <Type2 >{type[1]}</Type2 >
+                        : null
+                    }
+                  
+                        </Box>
                 </Card>
             </Link>
         </div>

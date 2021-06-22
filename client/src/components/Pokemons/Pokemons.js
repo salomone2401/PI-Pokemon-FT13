@@ -98,8 +98,6 @@ const Pokemons = () => {
   }, [dispatch])
 
   const pokemons = useSelector(state => state.pokemons);
-  const error = useSelector(state => state.error);
-  const loading = useSelector(state => state.loading);
 
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
@@ -132,11 +130,6 @@ const Pokemons = () => {
         <Text>New Pokemon</Text>
       </Link>
       <NamePokemon />
-
-
-
-
-      { error ? <p>There was a mistake</p> : null}
 
       <Container>
       {
