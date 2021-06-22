@@ -52,6 +52,7 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 pokemonDetail: action.payload
             }
+
         case GET_POKEMON_NAME:
             return {
                 ...state,
@@ -63,21 +64,6 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 types: action.payload
             }
-        //SI EL TYPE ES UN STRING
-        // case GET_TYPES_POKEMONS:
-        // return {
-        //     ...state,
-        //     pokemons: state.pokemons.filter(pokemon =>
-        //         pokemon.type == action.payload)
-        // }
-        //SI EL TYPE ES UN ARRAY
-        // case GET_TYPES_POKEMONS:
-        //         return {
-        //             ...state,
-        //             pokemons: state.pokemons.filter(item => 
-        //                  item.type.indexOf(action.payload) >= 0
-        //             )
-        //         }
         case GET_TYPES_POKEMONS:
             return {
                 ...state,
@@ -91,7 +77,6 @@ function rootReducer(state = initialState, action) {
                     }
                 })
             }
-        //SI EL TYPE ES UN ARRAY
         case CREATE_POKEMON:
             return {
                 ...state,
@@ -139,12 +124,12 @@ function rootReducer(state = initialState, action) {
                 pokemons: action.payload
             }
         }
-        // case FILT_OWN_POKEMON: {
-        //     return {
-        //         ...state,
-        //         pokemons: action.payload
-        //     }
-        // }
+        case FILT_OWN_POKEMON: {
+            return {
+                ...state,
+                pokemons: action.payload
+            }
+        }
         // case FILT_BY_TYPE: {
         //     return {
         //         ...state,

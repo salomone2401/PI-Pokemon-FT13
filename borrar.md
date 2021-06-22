@@ -160,3 +160,70 @@ const Header = () => {
  
 export default Header;
 
+
+  5    "type": "rock,bug",
+   "type": "grass,poison",
+
+
+   [
+    {
+        "id": 1,
+        "name": "bulbasaur",
+        "type": "grass,poison",
+        "HP": 45,
+        "attack": 49,
+        "defense": 49,
+        "speed": 45,
+        "height": 7,
+        "weight": 69
+    }
+]
+
+[
+    {
+        "id": "31b34c1c-9b05-4460-9ee4-31a1801f41cb",
+        "name": "lolo",
+        "type": "rock,bug",
+        "HP": 7,
+        "attack": 78,
+        "defense": 77,
+        "speed": 78,
+        "height": 77,
+        "weight": 7
+    }
+]
+
+    {/* /* <Image>
+            <img src={pokemonDetail.img} alt="pokemon character" />
+          </Image> */}
+
+          {/* <Tipo>
+            {/* <Type>{name}</Type>
+            <Type>{street}</Type> */}
+          {/* </Tipo>
+          <Box>
+            <div>
+              <Text>Name<Span>{pokemonDetail.name}</Span></Text>
+              <Text>HP<Span>{pokemonDetail.HP}</Span></Text>
+            </div>
+
+            <div>
+              <Text>Attack<Span>{pokemonDetail.attack}</Span></Text>
+              <Text>Defense<Span>{pokemonDetail.defense}</Span></Text>
+            </div>
+
+            <div>
+              <Text>Height<Span>{pokemonDetail.height}</Span></Text>
+              <Text>Weight<Span>{pokemonDetail.weight}</Span></Text>
+            </div>
+          </Box>
+          </Container> */ }
+// if (pokemonDetail === null || pokemonDetail === undefined) {
+  //   return (<Loading />)
+  // } else {
+    
+    // var input = pokemonDetail.type
+    // var fields = input.split(',');
+
+    // var name = fields[0];
+    // var street = fields[1];

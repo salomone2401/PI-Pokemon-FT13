@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import myImage from '../img/e.png';
+import myImage from '../img/bal.png';
 
 const Image = styled.img`
+margin-top: 3rem;
       width: 180px;
       height: 180px;
       -webkit-animation:spin 4s linear infinite;
@@ -15,19 +16,16 @@ const Image = styled.img`
 
 
 const Load = styled.p`
-display: flex;
-
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
     border-radius:5px;
     text-align: center;
 `;
 const Container = styled.div`
- display: flex;
- background-color: red;
- border-radius: 20px;
- justify-content: center;
- align-items: center;
+margin-top: 2rem;
+    position: absolute;
+    left: 40%;
+
 
 `;
 const Loading = () => {

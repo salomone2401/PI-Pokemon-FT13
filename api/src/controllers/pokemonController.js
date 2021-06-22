@@ -22,8 +22,8 @@ exports.addNewPokemon = async (req, res, next) => {
 
 exports.getAllPokemons = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=10')
-    
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=4')
+
         //DATABASE
         const elem = await Pokemon.findAll()
         const arg = await PokemonType.findAll()
@@ -33,7 +33,7 @@ exports.getAllPokemons = async (req, res, next) => {
         for (let i = 0; i < arg.length; i++) {
             const pokeId = arg[i].dataValues.pokemonId;
             const tipoId = arg[i].dataValues.typeId;
-    
+
             const typeName = await Type.findAll({
                 where: {
                     id: tipoId
@@ -45,6 +45,8 @@ exports.getAllPokemons = async (req, res, next) => {
                 }
             }
         }
+        //FIN DATABASE
+
         let respuesta = api.data.results
         let info = [];
         for (let i = 0; i < respuesta.length; i++) {
@@ -65,26 +67,84 @@ exports.getAllPokemons = async (req, res, next) => {
 };
 
 
-exports.getPokemonById = (req, res, next) => {
-    const api = axios.get(`https://pokeapi.co/api/v2/pokemon/${req.params.id}`)
-        .then(response => {
-            let apiRes = response
-            return res.send(
-                {
-                    id: apiRes.data.id,
-                    img: apiRes.data.sprites.other.dream_world.front_default,
-                    name: apiRes.data.name,
-                    type: apiRes.data.types.map(x => x.type.name).toString(),
-                    HP: apiRes.data.stats[0].base_stat,
-                    attack: apiRes.data.stats[1].base_stat,
-                    defense: apiRes.data.stats[2].base_stat,
-                    speed: apiRes.data.stats[5].base_stat,
-                    height: apiRes.data.height,
-                    weight: apiRes.data.weight
-                })
-        })
-        .catch(err =>
-            res.status(404).send('there isnt a pokemon with that name'))
+
+
+
+
+// "type": "rock,bug",
+
+// "type": "grass,poison",
+
+
+
+
+
+exports.getPokemonById = async (req, res, next) => {
+    try {
+        if(req.params.id.length <4){
+        
+        const api = await axios.get(`https://pokeapi.co/api/v2/pokemon/${req.params.id}`)
+        let apiRes = api.data
+
+        let object = {
+            id: apiRes.id,
+            img: apiRes.sprites.other.dream_world.front_default,
+            name: apiRes.name,
+            type: apiRes.types.map(x => x.type.name).toString(),
+            HP: apiRes.stats[0].base_stat,
+            attack: apiRes.stats[1].base_stat,
+            defense: apiRes.stats[2].base_stat,
+            speed: apiRes.stats[5].base_stat,
+            height: apiRes.height,
+            weight: apiRes.weight
+        }
+        res.send(object)
+    }else{
+      
+        const hola = req.params
+        let resultado = []
+        const elem = await Pokemon.findAll()
+        const arg = await PokemonType.findAll()
+        for (let i = 0; i < elem.length; i++) {
+            elem[i] = { ...elem[i].dataValues, type: [] }
+        }
+        for (let i = 0; i < arg.length; i++) {
+            const pokeId = arg[i].dataValues.pokemonId;
+            const tipoId = arg[i].dataValues.typeId;
+
+            const typeName = await Type.findAll({
+                where: {
+                    id: tipoId
+                }
+            })
+            for (let j = 0; j < elem.length; j++) {
+                if (pokeId.toString() === elem[j].id) {
+                    elem[j].type.push(typeName[0].dataValues.name)
+                }
+            }
+        }
+        for (let i = 0; i < elem.length; i++) {
+            if (elem[i].id === hola.id) {
+                let obj = {
+                    id: elem[i].id,
+                    name: elem[i].name,
+                    type: elem[i].type.toString(),
+                    HP: elem[i].healthpoints,
+                    attack: elem[i].attack,
+                    defense: elem[i].defense,
+                    speed: elem[i].speed,
+                    height: elem[i].height,
+                    weight: elem[i].weight,
+                }
+
+                res.send(obj)
+            }
+        }
+    }
+
+    } catch (error) {
+        next(error);
+    }
 };
 
 
@@ -185,50 +245,13 @@ exports.filtOwnPokemons = async (req, res, next) => {
 };
 
 
-
-// exports.filtByType = async (req, res, next) => {
-//     {type} :  req.query
-//     try {
-//         const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=4')
-//         let respuesta = api.data.results
-//         let info = [];
-//         for (let i = 0; i < respuesta.length; i++) {
-//             const apiRes = await axios.get(`${respuesta[i].url}`)
-//             let object = {
-//                 id: respuesta[i].url.split('/')[6],
-//                 img: apiRes.data.sprites.other.dream_world.front_default,
-//                 name: apiRes.data.name,
-//                 type: apiRes.data.types.map(e => e.type.name)
-//             }
-//             info.push(object)
-//         }
-//         var nev = info.filter(function (el) {
-//             for (let i = 0; i < info.length; i++) {
-//              return el.type[i].includes(type)
-//          }
-//         })
-//        res.send(nev)
-
-//     } catch (error) {
-//         next(error);
-//     }
-// };
-
-// exports.buscar = async (req, res, next) => {
-
-//     const result = await Type.findAll({
-//           attributes: ['id', 'name'],   
-//           include: [ { model: pokemon_type, as: 'pokemon_type' } ]
-//       })
-//       console.log(result)
-
-//       }
 exports.buscar = async (req, res, next) => {
-
+    const hola = req.params
+    let resultado = []
     const elem = await Pokemon.findAll()
     const arg = await PokemonType.findAll()
     for (let i = 0; i < elem.length; i++) {
-        elem[i].dataValues = { ...elem[i].dataValues, type: [] }
+        elem[i] = { ...elem[i].dataValues, type: [] }
     }
     for (let i = 0; i < arg.length; i++) {
         const pokeId = arg[i].dataValues.pokemonId;
@@ -240,11 +263,30 @@ exports.buscar = async (req, res, next) => {
             }
         })
         for (let j = 0; j < elem.length; j++) {
-            if (pokeId.toString() === elem[j].dataValues.id) {
-                elem[j].dataValues.type.push(typeName[0].dataValues.name)
+            if (pokeId.toString() === elem[j].id) {
+                elem[j].type.push(typeName[0].dataValues.name)
             }
         }
     }
+    for (let i = 0; i < elem.length; i++) {
+        if (elem[i].id === hola.id) {
+            let obj = {
+                id: elem[i].id,
+                name: elem[i].name,
+                type: elem[i].type.toString(),
+                HP: elem[i].healthpoints,
+                attack: elem[i].attack,
+                defense: elem[i].defense,
+                speed: elem[i].speed,
+                height: elem[i].height,
+                weight: elem[i].weight,
+            }
+
+            resultado.push(obj)
+        }
+    }
+    res.send(resultado)
 }
+
 
 

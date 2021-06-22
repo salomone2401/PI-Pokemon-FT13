@@ -63,15 +63,6 @@ const Fieldset = styled.fieldset`
 
 `;
 
-const Legend = styled.legend`
-    margin-top: 0;
-    color: black;
-    font-size: 1.5rem;
-    text-align: center;
-    padding: 1px;
-    background-color: #DDD4E6;
-    border-radius: 5px;
-`;
 
 
 const Text = styled.p`
@@ -83,10 +74,16 @@ const Text = styled.p`
     border-radius:5px;
     box-sizing: border-box;
     color:#000000;
-    background-color: #FAE31D;
+    background-color: #C197FF;
     position: absolute;
     right: 1%;
     top: 0;
+`;
+
+const Div = styled.div`
+  position: fixed;
+  bottom: 0%;
+  right: 0;
 `;
 
 const Pokemons = () => {
@@ -109,7 +106,7 @@ const Pokemons = () => {
   //const currentPokemon = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
-  
+
   return (
     <>
       <GlobalStyle />
@@ -138,26 +135,27 @@ const Pokemons = () => {
 
 
       { error ? <p>There was a mistake</p> : null}
-   
-    
+
       <Container>
-        {
-          Array.isArray(pokemons) ?
-            pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon).map(pokemon => (
+      {
+        Array.isArray(pokemons) ?
+          pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon).map(pokemon => (
+        
               <Pokemon
                 key={pokemon.id}
                 pokemon={pokemon}
               />
-            
-            )) : <p>loading</p>
-            // <Loading />
-        }
-          <Pagination
-              pokemonsPerPage={pokemonsPerPage}
-              paginate={paginate}
-              />
-      </Container>
-     
+          ))
+          : <Loading />
+      }
+    </Container>
+    {
+        Array.isArray(pokemons) ?
+        <Pagination
+          pokemonsPerPage={pokemonsPerPage}
+          paginate={paginate}
+        /> : null
+      }
 
     </>
   )

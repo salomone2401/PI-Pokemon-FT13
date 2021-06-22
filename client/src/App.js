@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import LandingPage from './components/landingPage';
+import LandingPage from './components/LandingPage';
 import IdPokemon from './components/Pokemons/IdPokemon';
 import NamePokemon from './components/Pokemons/NamePokemon';
 import Types from './components/Pokemons/Types';

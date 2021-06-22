@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components'
 import Header from '../Header';
+import Loading from '../Loading';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -18,7 +19,6 @@ width: 50%;
 position: fixed;
   top: 50%;
   left: 50%;
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -35,7 +35,6 @@ const Image = styled.div`
 	transform: scale(0.9);
 }
 `;
-
 
 
 const Button = styled.button`
@@ -116,7 +115,10 @@ const IdPokemon = () => {
   const pokemonDetail = useSelector(state => state.pokemonDetail);
   const { id } = useParams()
 
+
+
   useEffect(() => {
+
     dispatch(getPokemonDetail(id));
     // eslint-disable-next-line
   }, [dispatch, id])
@@ -128,50 +130,48 @@ const IdPokemon = () => {
     var input = pokemonDetail.type
     var fields = input.split(',');
 
-    var name = fields[0];
+    var pop = fields[0];
     var street = fields[1];
 
-    return (
+return (
 
 
-      <>
-        <GlobalStyle />
-        <Header />
-        <Link to={'/pokemon'}>
-          <Button>&laquo; BACK TO MAIN PAGE</Button>
-        </Link>
-        <Container>
+  <>
+    <GlobalStyle />
+    <Header />
+    <Link to={'/pokemon'}>
+      <Button>&laquo; BACK TO MAIN PAGE</Button>
+    </Link>
+    <Container>
 
-          <Image>
-            <img src={pokemonDetail.img} alt="pokemon character" />
-          </Image>
+      <Image>
+        <img src={pokemonDetail.img} alt="pokemon character" />
+      </Image>
 
-          <Tipo>
-            <Type>{name}</Type>
-            <Type>{street}</Type>
-          </Tipo>
-          <Box>
-            <div>
-              <Text>Name<Span>{pokemonDetail.name}</Span></Text>
-              <Text>HP<Span>{pokemonDetail.HP}</Span></Text>
-            </div>
+      <Tipo>
+        <Type>{pop}</Type>
+        <Type>{street}</Type>
+      </Tipo>
+      <Box>
+        <div>
+          <Text>Name<Span>{pokemonDetail.name}</Span></Text>
+          <Text>HP<Span>{pokemonDetail.HP}</Span></Text>
+        </div>
 
-            <div>
-              <Text>Attack<Span>{pokemonDetail.attack}</Span></Text>
-              <Text>Defense<Span>{pokemonDetail.defense}</Span></Text>
-            </div>
+        <div>
+          <Text>Attack<Span>{pokemonDetail.attack}</Span></Text>
+          <Text>Defense<Span>{pokemonDetail.defense}</Span></Text>
+        </div>
 
-            <div>
-              <Text>Height<Span>{pokemonDetail.height}</Span></Text>
-              <Text>Weight<Span>{pokemonDetail.weight}</Span></Text>
-            </div>
-          </Box>
-        </Container>
-      </>
-    )
-  }
+        <div>
+          <Text>Height<Span>{pokemonDetail.height}</Span></Text>
+          <Text>Weight<Span>{pokemonDetail.weight}</Span></Text>
+        </div>
+      </Box>
+    </Container>
+  </>
+)
+}
 }
 
 export default IdPokemon;
-
-

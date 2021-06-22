@@ -4,6 +4,7 @@ import {
     GET_POKEMONS_ERROR,
     GET_POKEMON_DETAIL,
     GET_POKEMON_NAME,
+    GET_POKEMON_DETAILDB,
 
     CREATE_POKEMON,
     CREATE_POKEMON_SUCCESS,
@@ -65,6 +66,9 @@ export function getPokemonDetail(id) {
         }
     }
 }
+
+
+
 
 
 export function getPokemonName(name) {

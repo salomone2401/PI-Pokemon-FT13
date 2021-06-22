@@ -19,7 +19,7 @@ const Text= styled.p`
     text-align: center;
     padding: 1rem 1rem;
     font-size: 1.7rem;
-    background-color: #FFEC45;
+    background-color: #C197FF;
     display:inline-block;
     border: 1px solid #000000;
     border-radius:5px;

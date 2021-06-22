@@ -16,7 +16,7 @@ const Bar = styled.input`
 `;
 
 const Button = styled.button`  
-   background-color: #FAE31D;
+   background-color: #C197FF;
    border: 1px solid #000000;
    border-radius:5px;
     font-size: 1.3rem;

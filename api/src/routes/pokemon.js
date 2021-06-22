@@ -19,7 +19,7 @@ router.get('/',
 getAllPokemons
 );
 
-router.get('/buscar',
+router.get('/buscar/:id',
 buscar
 )
 
@@ -50,7 +50,8 @@ router.post('/',
 )
 
 router.get('/:id',
-    getPokemonById
+ getPokemonById,
+ 
 )
 router.get('/:name',
     getPokemonById
