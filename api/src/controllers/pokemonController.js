@@ -105,6 +105,7 @@ exports.getPokemonById = async (req, res, next) => {
                         speed: elem[i].speed,
                         height: elem[i].height,
                         weight: elem[i].weight,
+                        img: elem[i].img
                     }
                     info.push(obj)
                 }
@@ -163,6 +164,7 @@ exports.getPokemonById = async (req, res, next) => {
                         speed: elem[i].speed,
                         height: elem[i].height,
                         weight: elem[i].weight,
+                        img: elem[i].img
                     }
                     res.send(obj)
                 }
@@ -189,62 +191,6 @@ exports.getPokemonById = async (req, res, next) => {
         console.log(error)
     };
 }
-
-
-
-///POKEMON NAME
-
-exports.getPokemonByName = async (req, res, next) => {
-    try {
-        let info = []
-        const hola = req.params
-        const elem = await Pokemon.findAll()
-        const arg = await PokemonType.findAll()
-        for (let i = 0; i < elem.length; i++) {
-            elem[i] = { ...elem[i].dataValues, type: [] }
-        }
-        for (let i = 0; i < arg.length; i++) {
-            const pokeId = arg[i].dataValues.pokemonId;
-            const tipoId = arg[i].dataValues.typeId;
-
-            const typeName = await Type.findAll({
-                where: {
-                    id: tipoId
-                }
-            })
-            for (let j = 0; j < elem.length; j++) {
-                if (pokeId.toString() === elem[j].id) {
-                    elem[j].type.push(typeName[0].dataValues.name)
-                }
-            }
-        }
-        for (let i = 0; i < elem.length; i++) {
-            if (elem[i].name === hola.name) {
-                let obj = {
-                    id: elem[i].id,
-                    name: elem[i].name,
-                    type: elem[i].type.toString(),
-                    HP: elem[i].healthpoints,
-                    attack: elem[i].attack,
-                    defense: elem[i].defense,
-                    speed: elem[i].speed,
-                    height: elem[i].height,
-                    weight: elem[i].weight,
-                }
-                info.push(obj)
-            }
-        }
-        if (info.length === 0) {
-            console.log('apiiii')
-        } else {
-            console.log(info)
-        }
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-
 
 
 

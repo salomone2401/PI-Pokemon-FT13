@@ -3,7 +3,6 @@ const {
     getAllPokemons,
     addNewPokemon,
     getPokemonById,
-    getPokemonByName,
     OrderAscAttack,
     OrderDescAttack,
     filtAPIPokemons,
@@ -42,9 +41,6 @@ router.post('/',
 router.get('/:id',
  getPokemonById
 )
-// router.get('/:name',
-// getPokemonByName
-// )
 
 
  
