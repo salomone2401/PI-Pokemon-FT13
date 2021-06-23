@@ -13,14 +13,14 @@ import NewPokemon from './components/Pokemons/NewPokemon';
 function App() {
   return (
     <Router>
-      <Provider store={store}>
+      <Provider store={store}> 
         <Switch>
           <Route exact path='/' component={LandingPage} />
           <Route exact path='/pokemon' component={Pokemons} />
           <Route exact path='/pokemon/:id' component={IdPokemon} />
           <Route exact path='/pokemon/:name' component={NamePokemon} />
           <Route exact path='/new' component={NewPokemon} />
-        </ Switch>
+         </ Switch>
         </Provider>
     </Router>
 

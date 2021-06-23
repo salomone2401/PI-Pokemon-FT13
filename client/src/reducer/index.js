@@ -1,7 +1,5 @@
 import {
-    GET_ALL_POKEMONS,
     GET_POKEMONS_SUCCESS,
-    GET_POKEMONS_ERROR,
     GET_POKEMON_DETAIL,
     GET_POKEMON_NAME,
     GET_TYPES,
@@ -15,6 +13,7 @@ import {
     ORDER_ATTACK_DESC,
     FILT_API_POKEMON,
     FILT_OWN_POKEMON,
+
 } from '../types';
 
 const initialState = {
@@ -31,7 +30,6 @@ const initialState = {
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case CREATE_POKEMON:
-        case GET_ALL_POKEMONS:
             return {
                 ...state,
                 loading: action.payload
@@ -46,7 +44,6 @@ function rootReducer(state = initialState, action) {
                 pokemons: action.payload
             }
         case CREATE_POKEMON_ERROR:
-        case GET_POKEMONS_ERROR:
             return {
                 ...state,
                 loading: false,

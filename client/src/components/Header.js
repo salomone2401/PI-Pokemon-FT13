@@ -15,7 +15,7 @@ const Head = styled.div`
  margin-bottom: 0;
 `;
 
-const Text= styled.p`
+const Text = styled.p`
     text-align: center;
     padding: 1rem 1rem;
     font-size: 1.7rem;
@@ -36,15 +36,15 @@ const Text= styled.p`
 `;
 
 const Header = () => {
-    return (
-         
-        <Head>
-            <Link to={'/pokemon'} >
-            <Text>Pokemon App</Text>
-            </Link>
+  return (
 
-        </Head> 
-     );
+    <Head>
+      <Link to={'/pokemon'} >
+        <Text>Pokemon App</Text>
+      </Link>
+
+    </Head>
+  );
 }
- 
+
 export default Header;

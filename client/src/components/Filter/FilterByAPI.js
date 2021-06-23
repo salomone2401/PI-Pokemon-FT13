@@ -1,8 +1,10 @@
 import React from 'react';
-import { useDispatch} from 'react-redux';
-import {getAPIPokemons} from '../../actions/pokemonsAction';
+import { useDispatch } from 'react-redux';
+import { getAPIPokemons } from '../../actions/pokemonsAction';
 
 import styled from 'styled-components';
+
+
 const Button = styled.button`
 background-color: #00C9A7;
 margin-top: 1rem;
@@ -13,21 +15,21 @@ font-weight: 700;
 color: black;
 border: 1px solid black;
 text-decoration: none;
-`; 
+`;
 
 const FilterByAPI = () => {
 
     const dispatch = useDispatch();
 
-      const handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault();
         dispatch(getAPIPokemons())
-      }
+    }
 
     return (
         <>
             <form
-            onSubmit={handleSubmit}>
+                onSubmit={handleSubmit}>
                 <Button
                     type='submit'
                 >

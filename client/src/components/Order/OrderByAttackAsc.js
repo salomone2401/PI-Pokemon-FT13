@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch} from 'react-redux';
-import { orderAttackAsc} from '../../actions/pokemonsAction';
+import { useDispatch } from 'react-redux';
+import { orderAttackAsc } from '../../actions/pokemonsAction';
 
 import styled from 'styled-components';
 
@@ -14,20 +14,20 @@ font-weight: 700;
 color: black;
 border: 1px solid black;
 text-decoration: none;
-`; 
+`;
 
 const OrderByAttackAsc = () => {
     const dispatch = useDispatch();
 
-      const handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault();
         dispatch(orderAttackAsc())
-      }
+    }
 
     return (
         <>
             <form
-            onSubmit={handleSubmit}>
+                onSubmit={handleSubmit}>
                 <Button
                     type='submit'
                 >

@@ -29,14 +29,14 @@ margin-top: 2rem;
 
 `;
 const Loading = () => {
-    return ( 
+    return (
         <Container>
             <Load >Loading...</Load>
-       
+
             <Image src={`${myImage}`} alt="pokemon" />;
-        
-          </Container>
-     );
+
+        </Container>
+    );
 }
- 
+
 export default Loading;

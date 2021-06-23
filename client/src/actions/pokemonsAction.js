@@ -17,34 +17,6 @@ import {
 
 import clientAxios from '../config/axios';
 
-
-// export function getPokemonsAction() {
-//     return async (dispatch) => {
-//         dispatch(downloadPokemons());
-//         try {
-//             const res = await clientAxios.get('/pokemon/');
-//             dispatch(downloadPokemonsSuccess(res.data));
-//         } catch (error) {
-//             console.log(error)
-//             dispatch(downloadPokemonsError());
-//         }
-//     }
-// }
-// const downloadPokemons = () => ({
-//     type: GET_ALL_POKEMONS,
-//     payload: true
-// });
-
-// const downloadPokemonsSuccess = pokemons => ({
-//     type: GET_POKEMONS_SUCCESS,
-//     payload: pokemons
-// });
-
-// const downloadPokemonsError = () => ({
-//     type: GET_POKEMONS_ERROR,
-//     payload: false
-// });
-
 export function getPokemonsAction() {
     return async (dispatch) => {
         try {
@@ -54,7 +26,8 @@ export function getPokemonsAction() {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error)
+            if (error.response?.status !== 404) alert("Something went wrong")
+            dispatch({ type: GET_POKEMONS_SUCCESS, payload: null })
         }
     }
 }
@@ -69,12 +42,11 @@ export function getPokemonDetail(id) {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error)
+            if (error.response?.status !== 404) alert("Something went wrong")
+            dispatch({ type: GET_POKEMON_DETAIL, payload: null })
         }
     }
 }
-
-
 
 
 
@@ -112,7 +84,7 @@ export function createNewPokemon(pokemon, type) {
     }
 }
 
-const addPokemon = () => ({
+export const addPokemon = () => ({
     type: CREATE_POKEMON,
     payload: true
 });

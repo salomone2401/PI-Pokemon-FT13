@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React  from 'react';
+import { useDispatch } from 'react-redux';
 import { orderNameAsc } from '../../actions/pokemonsAction';
-
-
 
 import styled from 'styled-components';
 
@@ -16,7 +14,7 @@ font-weight: 700;
 color: black;
 border: 1px solid black;
 text-decoration: none;
-`; 
+`;
 
 const OrderByNameAsc = () => {
     const dispatch = useDispatch();

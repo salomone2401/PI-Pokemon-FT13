@@ -8,12 +8,13 @@ import styled from 'styled-components';
 import myImage from '../../img/pika.png';
 
 import { createGlobalStyle } from 'styled-components'
+import { Link } from 'react-router-dom';
 
 
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color:#D5CABD;
+    background-color: #D9EDDF;
   }
 `;
 const Image = styled.img`
@@ -25,11 +26,13 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
   
 `;
 const Diva = styled.div`
 margin: .5rem;
 font-size: 1.3rem;
+
 
 `;
 const Text = styled.h2`
@@ -44,9 +47,6 @@ text-align: center;
 font-size: 1.6rem;
 `;
 
-const Graph = styled.p`
-font-size: 1.3rem;
-`;
 const Div = styled.div`
 width: 500px;
 margin: 1rem 2rem;
@@ -60,6 +60,7 @@ const Tipo = styled.div`
     grid-template-columns: repeat(3, 1fr);
     margin: 1.5rem;
     background-color: #C493FF;
+    border-radius: 5px;
 
 `;
 
@@ -69,6 +70,7 @@ const Input = styled.input`
     padding: .5rem;
     background-color: #C493FF;
     border: 1px solid #845EC2;
+    border-radius: 5px;
     ::placeholder { 
   color: black;
   opacity: 1; 
@@ -78,7 +80,7 @@ const CheckBox = styled.input`
   list-style: none;
   float: left;
   margin-right: .5rem;
- 
+
 `;
 const Box = styled.div`
 margin-left: 2.5rem;
@@ -91,28 +93,41 @@ font-weight: 700;
 text-align: center;
 `;
 const Button = styled.button`
-background-color: #00C9A7;
+    background-color: #00C9A7;
+    margin-top: 1rem;
+    padding: 1rem 3rem;
+    border-radius: 7px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: black;
+    border: 1px solid black;
+    text-decoration: none;
+    position: absolute;
+    top: 85%;
+    right: 65%;
+`;
+
+
+const But = styled.button`
 margin-top: 1rem;
-padding: 1rem 3rem;
+padding: 1rem 2rem;
 border-radius: 7px;
 font-size: 1.5rem;
 font-weight: 700;
+background-color: #00C9A7;
 color: black;
 border: 1px solid black;
 text-decoration: none;
 position: absolute;
-top: 85%;
-right: 70%;
-`; 
+    left: 1%;
+    top: 0;
 
+`;
 const NewPokemon = ({ history }) => {
 
   const dispatch = useDispatch();
 
   const types = useSelector(state => state.types);
-
-  const loading = useSelector(state => state.loading);
-  const error = useSelector(state => state.error);
 
   useEffect(() => {
     dispatch(getType());
@@ -141,7 +156,7 @@ const NewPokemon = ({ history }) => {
     })
   }
   const handleType = e => {
-      setType([
+    setType([
       ...type,
       [e.target.name] = e.target.value
     ])
@@ -149,120 +164,127 @@ const NewPokemon = ({ history }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
+    if (name === '') {
+      alert('The name is obligatory')
+      return;
+    }
+    alert('Pokemon Created!')
     dispatch(createNewPokemon(pokemon, type))
     history.push('/pokemon');
   }
 
   return (
-    <Container>
-      <GlobalStyle />
+    <>
+      <Header />
+      <Container>
 
-      <Div>
-        <Text>
-          Create your Pokemon
+        <GlobalStyle />
+        <Link to={'/pokemon'}>
+          <But>&laquo; BACK TO MAIN PAGE</But>
+        </Link>
+        <Div>
+          <Text>
+            Create your Pokemon
         </Text>
-        <form
-          onSubmit={handleSubmit}>
-          <Box>
-            <Input
-              type="text"
-              placeholder="Name"
-              onChange={handleChange}
-              name='name'
-              value={name}
-            />
+          <form
+            onSubmit={handleSubmit}>
+            <Box>
+              <Input
+                type="text"
+                placeholder="Name"
+                onChange={handleChange}
+                name='name'
+                value={name}
+              />
 
-            <Input
-              type="number"
-              placeholder="Health Points"
-              onChange={handleChange}
-              name='healthpoints'
-              value={healthpoints}
-            />
-            <Input
-              type="number"
-              placeholder="Attack"
-              onChange={handleChange}
-              name='attack'
-              value={attack}
-            />
-            <Input
-              type="number"
-              placeholder="Speed"
-              onChange={handleChange}
-              name='speed'
-              value={speed}
-            />
+              <Input
+                type="number"
+                placeholder="Health Points"
+                onChange={handleChange}
+                name='healthpoints'
+                value={healthpoints}
+              />
+              <Input
+                type="number"
+                placeholder="Attack"
+                onChange={handleChange}
+                name='attack'
+                value={attack}
+              />
+              <Input
+                type="number"
+                placeholder="Speed"
+                onChange={handleChange}
+                name='speed'
+                value={speed}
+              />
 
-            <Input
-              type="number"
-              placeholder="Defense"
-              onChange={handleChange}
-              name='defense'
-              value={defense}
-            />
+              <Input
+                type="number"
+                placeholder="Defense"
+                onChange={handleChange}
+                name='defense'
+                value={defense}
+              />
 
-            <Input
-              type="number"
-              placeholder="Height"
-              onChange={handleChange}
-              name='height'
-              value={height}
-            />
+              <Input
+                type="number"
+                placeholder="Height"
+                onChange={handleChange}
+                name='height'
+                value={height}
+              />
 
-            <Input
-              type="number"
-              placeholder="Weight"
-              onChange={handleChange}
-              name='weight'
-              value={weight}
-            />
-               <Input
-              type="url"
-              placeholder="Image url"
-              onChange={handleChange}
-              name='img'
-              value={img}
-            />
-          </Box>
-          <Par>Choose a type</Par>
-         
-          {
-            type.length <2 ? <Advertencia>You can select only two</Advertencia>  : <p>erorrrr</p>
-          }
+              <Input
+                type="number"
+                placeholder="Weight"
+                onChange={handleChange}
+                name='weight'
+                value={weight}
+              />
+              <Input
+                type="url"
+                placeholder="Image url"
+                onChange={handleChange}
+                name='img'
+                value={img}
+              />
+            </Box>
+            <Par>Choose a type</Par>
 
-          <Tipo>
             {
-
-              Array.isArray(types) ? types.map(type => (
-                <Diva>
-                  {type.name}
-                  <CheckBox
-                    key={type.id}
-                    type="checkbox"
-                    value={type.name}
-                    name='type'
-                    onChange={handleType}
-                  />
-                </Diva>
-              )) : null
+              type.length < 2 ? <Advertencia>You can select only two</Advertencia> : null
             }
-          </Tipo>
+
+            <Tipo>
+              {
+
+                Array.isArray(types) ? types.map(type => (
+                  <Diva>
+                    {type.name}
+                    <CheckBox
+                      key={type.id}
+                      type="checkbox"
+                      value={type.name}
+                      name='type'
+                      onChange={handleType}
+                    />
+                  </Diva>
+                )) : null
+              }
+            </Tipo>
 
 
-          <Button
-            type='submit'
+            <Button
+              type='submit'
 
-          >Create</Button>
-  </form>
-      </Div>
-      <Image src={`${myImage}`} alt="Pokemon" />
-      { loading ? <p>Cargando...</p> : null}
+            >Create</Button>
+          </form>
+        </Div>
+        <Image src={`${myImage}`} alt="Pokemon" />
 
-      { error ? <p>{error}</p> : null}
-
-    </Container>
+      </Container>
+    </>
   );
 }
 

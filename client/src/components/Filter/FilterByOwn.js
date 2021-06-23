@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch} from 'react-redux';
-import {getOwnPokemons} from '../../actions/pokemonsAction';
+import { useDispatch } from 'react-redux';
+import { getOwnPokemons } from '../../actions/pokemonsAction';
 
 
 import styled from 'styled-components';
@@ -14,24 +14,24 @@ font-weight: 700;
 color: black;
 border: 1px solid black;
 text-decoration: none;
-`; 
+`;
 const FilterByOwn = () => {
 
     const dispatch = useDispatch();
 
-      const handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault();
         dispatch(getOwnPokemons())
-      }
+    }
 
     return (
         <>
             <form
-            onSubmit={handleSubmit}>
+                onSubmit={handleSubmit}>
                 <Button
                     type='submit'
                 >
-                   Pokemons created by users
+                    Pokemons created by users
             </Button>
 
             </form>

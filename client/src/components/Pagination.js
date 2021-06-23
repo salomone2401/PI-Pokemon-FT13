@@ -47,7 +47,7 @@ const Pagination = ({ pokemonsPerPage, paginate }) => {
   return (
 
     <Nav >
-    
+
       {pageNumbers.map(number => (
         <Pages key={number} >
 
@@ -57,7 +57,7 @@ const Pagination = ({ pokemonsPerPage, paginate }) => {
 
         </Pages>
       ))}
- 
+
     </Nav >
   );
 };

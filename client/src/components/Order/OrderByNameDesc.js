@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch} from 'react-redux';
-import {orderNameDesc } from '../../actions/pokemonsAction';
+import { useDispatch } from 'react-redux';
+import { orderNameDesc } from '../../actions/pokemonsAction';
 
 
 import styled from 'styled-components';
@@ -15,31 +15,31 @@ font-weight: 700;
 color: black;
 border: 1px solid black;
 text-decoration: none;
-`; 
+`;
 
 
 const OrderByNameAsc = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
 
 
-      const handleSubmit = e => {
-        e.preventDefault();
-        dispatch(orderNameDesc())
-      }
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch(orderNameDesc())
+  }
 
-    return (
-        <>
-              <form
-            onSubmit={handleSubmit}>
-                < Button type='submit'>
-                    Name &darr;
+  return (
+    <>
+      <form
+        onSubmit={handleSubmit}>
+        < Button type='submit'>
+          Name &darr;
             </ Button>
 
-            </form>
+      </form>
 
-        </>
-    );
+    </>
+  );
 }
 
 export default OrderByNameAsc;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch} from 'react-redux';
-import {getPokemonsAction} from '../../actions/pokemonsAction';
+import { useDispatch } from 'react-redux';
+import { getPokemonsAction } from '../../actions/pokemonsAction';
 
 import styled from 'styled-components';
 
@@ -15,30 +15,30 @@ font-weight: 700;
 color: black;
 border: 1px solid black;
 text-decoration: none;
-`; 
+`;
 
 const ResetFilter = () => {
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-      const handleSubmit = e => {
-        e.preventDefault();
-        dispatch(getPokemonsAction())
-      }
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch(getPokemonsAction())
+  }
 
-    return (
-        <>
-            <form
-            onSubmit={handleSubmit}>
-                <Button
-                type='submit'>
-                    Reset Filters
+  return (
+    <>
+      <form
+        onSubmit={handleSubmit}>
+        <Button
+          type='submit'>
+          Reset Filters
             </Button>
 
-            </form>
+      </form>
 
-        </>
-    );
+    </>
+  );
 }
 
 export default ResetFilter;

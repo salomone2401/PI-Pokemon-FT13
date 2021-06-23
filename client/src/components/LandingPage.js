@@ -75,12 +75,9 @@ top: 27%;
 left: 10%;
 z-index:1;
 margin-left: 2rem;
-
    
 `;
 
-// const Title = styled.h1`
-// `;
 const LandingPage = () => {
   return (
     <Fragment>

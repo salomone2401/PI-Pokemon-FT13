@@ -1,14 +1,12 @@
 const axios = require('axios')
 const { Type } = require('../db')
-const { v4: uuidv4 } = require('uuid');
-const {Pokemon} = require('../db');
 
 exports.saveTypes = async (req, res, next) => {
     try {
         const api = await axios.get('https://pokeapi.co/api/v2/type/')
         let respuesta = api.data.results
         for (let i = 0; i < respuesta.length; i++) {
-            const apiRes = await axios.get(`${respuesta[i].url}`)     
+            const apiRes = await axios.get(`${respuesta[i].url}`)
             const typeCreated = Type.findOrCreate({
                 where: {
                     name: apiRes.data.name,
@@ -16,19 +14,16 @@ exports.saveTypes = async (req, res, next) => {
                 }
             })
         }
-    }catch(error) {
+    } catch (error) {
         next(error);
     }
 }
 
 exports.getAllTypes = async (req, res, next) => {
     Type.findAll()
-  .then(categories => {
-    res.json(categories);
-  })
+        .then(categories => {
+            res.json(categories);
+        })
 };
 
 
-exports.buscar = async (req, res, next) => {
- 
-      }

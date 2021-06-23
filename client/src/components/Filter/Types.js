@@ -15,7 +15,7 @@ font-weight: 700;
 color: black;
 border: 1px solid black;
 text-decoration: none;
-`; 
+`;
 
 const Select = styled.select`
   color: black;
@@ -26,7 +26,7 @@ const Select = styled.select`
   -webkit-appearance: button;
   appearance: button;
   outline: none;
-  `; 
+  `;
 const Types = () => {
 
   const [type, setType] = useState('')
@@ -43,7 +43,7 @@ const Types = () => {
     })
   }
 
-  
+
   useEffect(() => {
     dispatch(getType());
     dispatch(getPokemonByType(Object.values(type).toString()))

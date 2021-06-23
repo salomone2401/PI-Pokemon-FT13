@@ -130,7 +130,7 @@ exports.getPokemonById = async (req, res, next) => {
                 }
                 res.send(object)
             }
-        }else if(req.params.id.includes('-')){
+        } else if (req.params.id.includes('-')) {
             const hola = req.params
             const elem = await Pokemon.findAll()
             const arg = await PokemonType.findAll()
@@ -169,7 +169,7 @@ exports.getPokemonById = async (req, res, next) => {
                     res.send(obj)
                 }
             }
-        }else{
+        } else {
             const api = await axios.get(`https://pokeapi.co/api/v2/pokemon/${req.params.id}`)
             let apiRes = api.data
 
@@ -188,7 +188,8 @@ exports.getPokemonById = async (req, res, next) => {
             res.send(object)
         }
     } catch (error) {
-        console.log(error)
+        res.status(500).json({ error: 'There was a mistake...' })
+
     };
 }
 
@@ -224,7 +225,7 @@ exports.OrderAscAttack = async (req, res, next) => {
         hola.sort((a, b) => (a.attack > b.attack) ? 1 : ((b.attack > a.attack) ? -1 : 0))
         res.send(hola)
     } catch (error) {
-        next(error);
+        res.status(500).json({ error: 'There was a mistake...' })
     }
 };
 
@@ -256,7 +257,7 @@ exports.OrderDescAttack = async (req, res, next) => {
         res.send(hola)
 
     } catch (error) {
-        next(error);
+        res.status(500).json({ error: 'There was a mistake...' })
     }
 };
 
@@ -278,7 +279,7 @@ exports.filtAPIPokemons = async (req, res, next) => {
         }
         res.send(info)
     } catch (error) {
-        next(error);
+        res.status(500).json({ error: 'There was a mistake...' })
     }
 };
 
@@ -306,7 +307,7 @@ exports.filtOwnPokemons = async (req, res, next) => {
         }
         res.send(elem)
     } catch (error) {
-        next(error);
+        res.status(500).json({ error: 'There was a mistake...' })
     }
 };
 

@@ -118,7 +118,7 @@ const Pokemons = () => {
 
         </Fieldset>
         <Fieldset>
-         
+
           <FilterByAPI />
           <FilterByOwn />
           <Types />
@@ -132,24 +132,24 @@ const Pokemons = () => {
       <NamePokemon />
 
       <Container>
-      {
-        Array.isArray(pokemons) ?
-          pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon).map(pokemon => (
-        
+        {
+          Array.isArray(pokemons) ?
+            pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon).map(pokemon => (
+
               <Pokemon
                 key={pokemon.id}
                 pokemon={pokemon}
               />
-          ))
-          : <Loading />
-      }
-    </Container>
-    {
+            ))
+            : <Loading />
+        }
+      </Container>
+      {
         Array.isArray(pokemons) ?
-        <Pagination
-          pokemonsPerPage={pokemonsPerPage}
-          paginate={paginate}
-        /> : null
+          <Pagination
+            pokemonsPerPage={pokemonsPerPage}
+            paginate={paginate}
+          /> : null
       }
 
     </>
