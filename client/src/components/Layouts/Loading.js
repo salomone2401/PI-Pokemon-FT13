@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import myImage from '../img/bal.png';
+import myImage from '../../img/bal.png';
 
 const Image = styled.img`
-margin-top: 3rem;
+    margin-top: 3rem;
       width: 180px;
       height: 180px;
       -webkit-animation:spin 4s linear infinite;
@@ -22,9 +22,12 @@ const Load = styled.p`
     text-align: center;
 `;
 const Container = styled.div`
-margin-top: 2rem;
+    margin-top: 2rem;
     position: absolute;
+    left: 26%;
+    @media (min-width: 768px) {
     left: 40%;
+    }
 
 
 `;

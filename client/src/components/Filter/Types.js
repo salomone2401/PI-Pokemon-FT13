@@ -2,31 +2,42 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getType } from '../../actions/typesAction';
 import { getPokemonByType } from '../../actions/pokemonsAction';
-
 import styled from 'styled-components';
 
 const Button = styled.button`
-background-color: #00C9A7;
-margin-top: 1rem;
-padding: 1rem 2rem;
-border-radius: 7px;
-font-size: 1.5rem;
-font-weight: 700;
-color: black;
-border: 1px solid black;
-text-decoration: none;
+    padding: 1rem 1.5rem;
+    background-color: #00C9A7;
+    border-radius: 7px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: black;
+    border: 1px solid black;
+    text-decoration: none;
+    :hover{
+        background-color: #95E06C;
+    }
+    @media (min-width: 768px) {
+        font-size: 1.5rem;
+    }
 `;
 
 const Select = styled.select`
-  color: black;
-  padding: 1rem 1rem;
-  font-size: 1.3rem;
-  border-radius: 7px;
-  border: 1px solid black;
-  -webkit-appearance: button;
-  appearance: button;
-  outline: none;
+    padding: 1rem 1.5rem;
+    color: black;
+    font-size: 1.2rem;
+    border-radius: 7px;
+    border: 1px solid black;
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+
   `;
+const Div = styled.div`
+    margin: 1.5rem .5rem;
+    @media (min-width: 768px) {
+        font-size: 1.5rem;
+ }
+`;
 const Types = () => {
 
   const [type, setType] = useState('')
@@ -57,7 +68,7 @@ const Types = () => {
   return (
     <form
       onSubmit={handleSubmit}>
-      <div>
+      <Div>
         <Select
           name='type'
           onChange={handleChange}
@@ -73,7 +84,7 @@ const Types = () => {
           }
         </Select>
         <Button type='submit'>Filt</Button>
-      </div>
+      </Div>
     </form>
 
   );

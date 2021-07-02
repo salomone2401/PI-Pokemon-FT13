@@ -8,8 +8,6 @@ const Nav = styled.div`
     position: static;
     padding: .5rem;
     border-radius: 8px;
-
-
 `;
 
 const Link = styled.a`

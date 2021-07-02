@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const clientAxios = axios.create({
-    baseURL : 'http://localhost:3001/'
+    baseURL : 'https://git.heroku.com/fathomless-garden-81944.git'
 });
 
 export default clientAxios;

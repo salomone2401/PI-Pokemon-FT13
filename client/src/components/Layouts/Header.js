@@ -1,10 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import myImage from '../img/e.png';
-
-
-
 
 const Head = styled.div`
    background: #DDD4E6;
@@ -28,10 +24,12 @@ const Text = styled.p`
     color:#000000;
     text-align:center;
     transition: all 0.15s;
+
     :hover{
       color: #FFFFFF;
       border-color:#FFFFFF;
       background-color: #1C1018;
+        transform: translateY(0) scale(1.1);
     }
 `;
 

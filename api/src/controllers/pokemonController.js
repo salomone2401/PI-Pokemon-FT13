@@ -202,12 +202,27 @@ exports.getPokemonById = async (req, res, next) => {
 exports.OrderAscAttack = async (req, res, next) => {
     try {
         const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
-        const mine = await Pokemon.findAll({
-            order: [
-                ['attack', 'DESC'],
-            ],
-            attributes: ['id', 'name', 'attack']
-        });
+          //DATABASE
+          const elem = await Pokemon.findAll()
+          const arg = await PokemonType.findAll()
+          for (let i = 0; i < elem.length; i++) {
+              elem[i] = { ...elem[i].dataValues, type: [] }
+          }
+          for (let i = 0; i < arg.length; i++) {
+              const pokeId = arg[i].dataValues.pokemonId;
+              const tipoId = arg[i].dataValues.typeId;
+  
+              const typeName = await Type.findAll({
+                  where: {
+                      id: tipoId
+                  }
+              })
+              for (let j = 0; j < elem.length; j++) {
+                  if (pokeId.toString() === elem[j].id) {
+                      elem[j].type.push(typeName[0].dataValues.name)
+                  }
+              }
+          }
         let respuesta = api.data.results
         let info = [];
         for (let i = 0; i < respuesta.length; i++) {
@@ -221,9 +236,9 @@ exports.OrderAscAttack = async (req, res, next) => {
             }
             info.push(object)
         }
-        const hola = info.concat(mine)
-        hola.sort((a, b) => (a.attack > b.attack) ? 1 : ((b.attack > a.attack) ? -1 : 0))
-        res.send(hola)
+        let resultado = [...info, ...elem]
+       resultado.sort((a, b) => (a.attack > b.attack) ? 1 : ((b.attack > a.attack) ? -1 : 0))
+        res.send(resultado)
     } catch (error) {
         res.status(500).json({ error: 'There was a mistake...' })
     }
@@ -232,12 +247,28 @@ exports.OrderAscAttack = async (req, res, next) => {
 exports.OrderDescAttack = async (req, res, next) => {
     try {
         const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
-        const mine = await Pokemon.findAll({
-            order: [
-                ['attack', 'DESC'],
-            ],
-            attributes: ['id', 'name', 'attack']
-        });
+               //DATABASE
+               const elem = await Pokemon.findAll()
+               const arg = await PokemonType.findAll()
+               for (let i = 0; i < elem.length; i++) {
+                   elem[i] = { ...elem[i].dataValues, type: [] }
+               }
+               for (let i = 0; i < arg.length; i++) {
+                   const pokeId = arg[i].dataValues.pokemonId;
+                   const tipoId = arg[i].dataValues.typeId;
+       
+                   const typeName = await Type.findAll({
+                       where: {
+                           id: tipoId
+                       }
+                   })
+                   for (let j = 0; j < elem.length; j++) {
+                       if (pokeId.toString() === elem[j].id) {
+                           elem[j].type.push(typeName[0].dataValues.name)
+                       }
+                   }
+               }
+               //FIN DATABASE
         let respuesta = api.data.results
         let info = [];
         for (let i = 0; i < respuesta.length; i++) {
@@ -251,10 +282,10 @@ exports.OrderDescAttack = async (req, res, next) => {
             }
             info.push(object)
         }
-        const hola = info.concat(mine)
-        hola.sort((a, b) => (a.attack < b.attack) ? 1 : ((b.attack < a.attack) ? -1 : 0))
+        let resultado = [...info, ...elem]
+        resultado.sort((a, b) => (a.attack < b.attack) ? 1 : ((b.attack < a.attack) ? -1 : 0))
 
-        res.send(hola)
+        res.send(resultado)
 
     } catch (error) {
         res.status(500).json({ error: 'There was a mistake...' })

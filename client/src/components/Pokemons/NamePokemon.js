@@ -5,8 +5,8 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 const Bar = styled.input`   
-   padding: 1rem 1rem;
-   border: 1px solid #000000;
+    padding: 1rem 1rem;
+    border: 1px solid #000000;
     border-radius:5px;
     font-size: 1.3rem;
     background-color: #DDD4E6;
@@ -16,20 +16,25 @@ const Bar = styled.input`
 `;
 
 const Button = styled.button`  
-   background-color: #C197FF;
-   border: 1px solid #000000;
-   border-radius:5px;
+    background-color: #C197FF;
+    border: 1px solid #000000;
+    border-radius:5px;
     font-size: 1.3rem;
     padding: 1rem 1rem;
-  
+    :hover{
+        background-color: #95E06C;
+        text-decoration: underline #95E06C;
+    }
 `;
 
 const Container = styled.div`  
     padding: 1rem 1rem;
     text-align: center;
+    @media (min-width: 768px) {
     position: absolute;
     left: 1%;
     top: 0;
+    }
 `;
 
 

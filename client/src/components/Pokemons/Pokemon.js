@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import myImage from '../../img/pok.png';
-
+import Loading from '../Layouts/Loading';
 
 const Box = styled.div`
     display: flex;
@@ -15,6 +15,9 @@ const Card = styled.div`
     padding: 1rem;
     background-color: #4B4453;
     border-radius: 10px;
+    :hover{
+        transform: translateY(0) scale(1.07);
+    }
 `;
 
 const Image = styled.img`
@@ -39,9 +42,9 @@ const Text = styled.p`
     display: block;
     color: white;
     font-size: 1.5rem;
+    margin: 1rem 0;
     text-align: center;
-    text-decoration: underline;
-    text-decoration-color: #4B4453 ;
+    text-decoration: underline #4B4453 ;
 `;
 const Span = styled.span`
     text-transform: uppercase;
@@ -57,22 +60,16 @@ const Type = styled.p`
     color: black;
     margin: 0 2rem;
     padding: 1rem 1.5rem;
-
+    :hover{
+        background-color: #95E06C;
+        text-decoration: underline #95E06C;
+    }
 `;
 
-const Type2 = styled.p`
-    background-color: #C197FF;
-    border-radius: 5px;
-    font-size: 1.5rem;
-    text-decoration: underline #C197FF;
-    color: black;
-    margin: 0 2rem;
-    padding: 1rem 1.5rem;
-
-`;
 const Pokemon = ({ pokemon }) => {
     const { name, type, id, img } = pokemon;
 
+    
     return (
         <div>
             <Link to={`/pokemon/${id}`}>
@@ -85,7 +82,7 @@ const Pokemon = ({ pokemon }) => {
                     <Box>
                         <Type >{type[0]}</Type >
                         {
-                            type[1] ? <Type2 >{type[1]}</Type2 >
+                            type[1] ? <Type >{type[1]}</Type >
                                 : null
                         }
 

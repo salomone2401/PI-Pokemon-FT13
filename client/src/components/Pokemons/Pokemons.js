@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NamePokemon from './NamePokemon';
-import Header from '../Header';
+import Header from '../Layouts/Header';
 import Pokemon from './Pokemon';
-import Pagination from '../Pagination';
+import Pagination from '../Layouts/Pagination';
 import { getPokemonsAction } from '../../actions/pokemonsAction';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -21,7 +21,7 @@ import ResetFilter from '../Filter/ResetFilter';
 
 import { createGlobalStyle } from 'styled-components'
 
-import Loading from '../Loading';
+import Loading from '../Layouts/Loading';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-   display: grid;
+    display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
     margin: 2rem;
@@ -42,48 +42,57 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
-   display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  @media (min-width: 768px) {
+  display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    @media (min-width: 768px) {
     display: grid;
-    grid-template-columns: 1fr 1.7fr;
-    grid-auto-rows: 75px;
-    grid-gap: 10px;
+    grid-template-columns: 1fr 2r;
+ 
+   
     margin: 1.5rem; 
 }
 `;
 const Fieldset = styled.fieldset`
-    display: flex;
-    justify-content: space-around;
-    
+    display: grid;
+    grid-template-columns:1fr;
+    column-gap: 1rem;
     background-color: #4B4453;
     border: 1px solid black;
-    margin-top: 0;
 
+    @media (min-width: 768px) {
+      display: flex;
+      justify-content: center;
+
+   
+    }
 `;
 
-
-
 const Text = styled.p`
+    text-decoration: underline #C197FF;
     margin: 1rem 1rem;
     text-align: center;
-    padding: 1rem 1rem;
-    font-size: 1.3rem;
+    padding: 1rem;
+    font-size: 1.5rem;
     border: 1px solid #000000;
     border-radius:5px;
     box-sizing: border-box;
     color:#000000;
     background-color: #C197FF;
-    position: absolute;
-    right: 1%;
-    top: 0;
-`;
-
-const Div = styled.div`
-  position: fixed;
-  bottom: 0%;
-  right: 0;
+    :hover{
+        transform: translateY(0) scale(1.1);
+        background-color: #95E06C;
+        text-decoration: underline #95E06C;
+    }
+    @media (min-width: 768px) {
+      font-size: 1.3rem;
+      padding: 1rem 1rem;
+      position: absolute;
+      right: 1%;
+      top: 0;
+     
+    }
+    
 `;
 
 const Pokemons = () => {
@@ -118,9 +127,8 @@ const Pokemons = () => {
 
         </Fieldset>
         <Fieldset>
-
-          <FilterByAPI />
           <FilterByOwn />
+          <FilterByAPI />
           <Types />
           <ResetFilter />
         </Fieldset>
@@ -145,11 +153,16 @@ const Pokemons = () => {
         }
       </Container>
       {
-        Array.isArray(pokemons) ?
-          <Pagination
+        Array.isArray(pokemons)  && pokemons.length <12 ? null 
+        :
+         Array.isArray(pokemons) ?
+            <Pagination
             pokemonsPerPage={pokemonsPerPage}
             paginate={paginate}
-          /> : null
+          />
+          : null
+        
+         
       }
 
     </>

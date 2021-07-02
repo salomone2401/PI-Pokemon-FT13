@@ -85,7 +85,7 @@ const LandingPage = () => {
       <Image src={`${myImage}`} alt="pokemon" />;
       <Wrapper>
         <Title>Welcome!</Title>
-        <Phrase>Find your favorite Pokemon character or create your own</Phrase>
+        <Phrase>Find your favorite Pokemon character or create one</Phrase>
 
         <Link to={'/pokemon'}>
           <Button>HOME</Button>

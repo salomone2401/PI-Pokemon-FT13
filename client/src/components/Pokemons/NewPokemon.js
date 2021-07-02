@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewPokemon } from '../../actions/pokemonsAction';
 import { getType } from '../../actions/typesAction';
-import Header from '../Header';
+import Header from '../Layouts/Header';
 import styled from 'styled-components';
 
 import myImage from '../../img/pika.png';
@@ -18,44 +18,52 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 const Image = styled.img`
-    width: 600px;
-    height: 600px;
+    width: 200px;
+    height: 200px;
+    :hover{
+        transform: translateY(0) scale(1.1);
+    }
+    @media (min-width: 768px) {
+      width: 480px;
+      height: 500px;
+ }
 `;
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
+    @media (min-width: 768px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+}
   
 `;
-const Diva = styled.div`
-margin: .5rem;
-font-size: 1.3rem;
-
-
+const DivTwo = styled.div`
+    margin: .5rem;
+    font-size: 1.3rem;
 `;
 const Text = styled.h2`
-margin: 1rem 0;
-text-align: center;
-font-weight: 900;
-font-size: 2rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-weight: 900;
+    font-size: 2rem;
 `;
 const Par = styled.p`
-margin: 1rem 0;
-text-align: center;
-font-size: 1.6rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-size: 1.6rem;
 `;
 
 const Div = styled.div`
-width: 500px;
-margin: 1rem 2rem;
-  background-color: #FEFEDF;
-  border-radius: 20px;
-
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin: 1rem 2rem;
+    background-color: #FEFEDF;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    @media (min-width: 768px) {
+      width: 500px;
+    }
 `;
-const Tipo = styled.div`
+const Type = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin: 1.5rem;
@@ -65,32 +73,29 @@ const Tipo = styled.div`
 `;
 
 const Input = styled.input`
-    margin: .5rem;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
     font-size: 1.5rem;
     padding: .5rem;
     background-color: #C493FF;
     border: 1px solid #845EC2;
     border-radius: 5px;
     ::placeholder { 
-  color: black;
-  opacity: 1; 
+    color: black;
+    opacity: 1; 
 }
 `;
 const CheckBox = styled.input`
-  list-style: none;
-  float: left;
-  margin-right: .5rem;
+    list-style: none;
+    float: left;
+`;
 
-`;
-const Box = styled.div`
-margin-left: 2.5rem;
-`;
 
 
 const Advertencia = styled.p`
-color: red;
-font-weight: 700;
-text-align: center;
+    color: red;
+    font-weight: 700;
+    text-align: center;
 `;
 const Button = styled.button`
     background-color: #00C9A7;
@@ -102,26 +107,35 @@ const Button = styled.button`
     color: black;
     border: 1px solid black;
     text-decoration: none;
+    margin-left: 35%;
+    :hover{
+        transform: translateY(0) scale(1.1);
+        background-color: #F6F83E;
+    }
+    @media (min-width: 768px) {
     position: absolute;
-    top: 85%;
+    top: 87%;
     right: 65%;
+    }
 `;
 
 
 const But = styled.button`
-margin-top: 1rem;
-padding: 1rem 2rem;
-border-radius: 7px;
-font-size: 1.5rem;
-font-weight: 700;
-background-color: #00C9A7;
-color: black;
-border: 1px solid black;
-text-decoration: none;
-position: absolute;
-    left: 1%;
-    top: 0;
-
+    margin-top: 1rem;
+    border-radius: 7px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background-color: #00C9A7;
+    color: black;
+    border: 1px solid black;
+    padding: 1rem 2rem;
+    :hover{
+        transform: translateY(0) scale(1.1);
+        background-color: #F6F83E;
+    }
+    position: absolute;
+        left: 1%;
+        top: 0;
 `;
 const NewPokemon = ({ history }) => {
 
@@ -180,7 +194,7 @@ const NewPokemon = ({ history }) => {
 
         <GlobalStyle />
         <Link to={'/pokemon'}>
-          <But>&laquo; BACK TO MAIN PAGE</But>
+           <But>&laquo; BACK</But>
         </Link>
         <Div>
           <Text>
@@ -188,7 +202,6 @@ const NewPokemon = ({ history }) => {
         </Text>
           <form
             onSubmit={handleSubmit}>
-            <Box>
               <Input
                 type="text"
                 placeholder="Name"
@@ -249,18 +262,15 @@ const NewPokemon = ({ history }) => {
                 name='img'
                 value={img}
               />
-            </Box>
             <Par>Choose a type</Par>
 
             {
               type.length < 2 ? <Advertencia>You can select only two</Advertencia> : null
             }
 
-            <Tipo>
-              {
-
-                Array.isArray(types) ? types.map(type => (
-                  <Diva>
+            <Type>
+              {Array.isArray(types) ? types.map(type => (
+                  <DivTwo>
                     {type.name}
                     <CheckBox
                       key={type.id}
@@ -269,20 +279,14 @@ const NewPokemon = ({ history }) => {
                       name='type'
                       onChange={handleType}
                     />
-                  </Diva>
+                  </DivTwo>
                 )) : null
               }
-            </Tipo>
-
-
-            <Button
-              type='submit'
-
-            >Create</Button>
+            </Type>
+            <Button type='submit'>Create</Button>
           </form>
         </Div>
         <Image src={`${myImage}`} alt="Pokemon" />
-
       </Container>
     </>
   );
