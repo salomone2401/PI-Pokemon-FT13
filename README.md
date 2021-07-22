@@ -18,12 +18,12 @@
 - Express
 
 
-## Start the APp
+## Start the App
 
  1. npm install
  2. npm start
  3. Enjoy it!
 
  
-## 
+## Resume
 I built this App in Henry 's Bootcamp using the PokeAPI. You can filter pokemons by name, by attack, sort alphabetically, create your own pokemon or take a look on every pokemon detail.
