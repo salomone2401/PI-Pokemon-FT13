@@ -26,7 +26,7 @@
 I built this App in Henry 's Bootcamp using the PokeAPI. You can filter pokemons by name, by attack, sort alphabetically, create your own pokemon or take a look on every pokemon detail.
 
 
-## What you will see
+## A few of what you will see
 
 <p align="left">
   <img height="500" src="./img/1.png" />
