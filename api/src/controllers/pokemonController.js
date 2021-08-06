@@ -22,7 +22,7 @@ exports.addNewPokemon = async (req, res, next) => {
 
 exports.getAllPokemons = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=30')
 
         //DATABASE
         const elem = await Pokemon.findAll()
@@ -201,7 +201,7 @@ exports.getPokemonById = async (req, res, next) => {
 
 exports.OrderAscAttack = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=30')
           //DATABASE
           const elem = await Pokemon.findAll()
           const arg = await PokemonType.findAll()
@@ -246,7 +246,7 @@ exports.OrderAscAttack = async (req, res, next) => {
 
 exports.OrderDescAttack = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=30')
                //DATABASE
                const elem = await Pokemon.findAll()
                const arg = await PokemonType.findAll()
@@ -295,7 +295,7 @@ exports.OrderDescAttack = async (req, res, next) => {
 
 exports.filtAPIPokemons = async (req, res, next) => {
     try {
-        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=40')
+        const api = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=30')
         let respuesta = api.data.results
         let info = [];
         for (let i = 0; i < respuesta.length; i++) {

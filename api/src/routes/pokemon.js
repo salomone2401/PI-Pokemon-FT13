@@ -1,43 +1,35 @@
 const { Router } = require('express');
-const {
-    getAllPokemons,
-    addNewPokemon,
-    getPokemonById,
-    OrderAscAttack,
-    OrderDescAttack,
-    filtAPIPokemons,
-    filtOwnPokemons,
-} = require('../controllers/pokemonController');
+const pokemon = require('../controllers/pokemonController');
 
 
 const router = Router();
 
 router.get('/',
-    getAllPokemons
+   pokemon.getAllPokemons
 );
 
 router.get('/orderAsc',
-    OrderAscAttack
+    pokemon.OrderAscAttack
 );
 router.get('/orderDesc',
-    OrderDescAttack
+    pokemon.OrderDescAttack
 );
 
 router.get('/filtAPI',
-    filtAPIPokemons
+    pokemon.filtAPIPokemons
 );
 
 router.get('/filtOwn',
-    filtOwnPokemons
+    pokemon.filtOwnPokemons
 );
 
 
 router.post('/',
-    addNewPokemon
+    pokemon.addNewPokemon
 )
 
 router.get('/:id',
-    getPokemonById
+    pokemon.getPokemonById
 )
 
 module.exports = router;
